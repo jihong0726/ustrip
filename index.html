@@ -2,55 +2,59 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8" />
-  <title>UsTrip · 旅行助手（手机版）</title>
+  <title>UsTrip · 台湾行程</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #f5f5fb;
-      --card-bg: #ffffff;
-      --primary: #6366f1;
-      --primary-soft: #e0e7ff;
-      --accent: #f97373;
-      --text-main: #111827;
+      --bg: #fafafa;
+      --card: #ffffff;
+      --card-soft: #f4f4f5;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --text: #111827;
       --text-muted: #6b7280;
       --border: #e5e7eb;
       --radius-lg: 14px;
       --radius-md: 10px;
-      --shadow-soft: 0 8px 18px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 4px 12px rgba(15, 23, 42, 0.08);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: radial-gradient(circle at top left, #e0f2fe, #f9fafb 40%),
-        radial-gradient(circle at bottom right, #e0e7ff, #f9fafb 50%);
-      color: var(--text-main);
-      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
 
     .app {
       max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
-      padding: 10px 10px 70px;
+      padding: 10px 10px 72px;
     }
 
-    header.app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(12px);
+    /* 顶部 */
+
+    .app-header {
       position: sticky;
-      top: 6px;
+      top: 0;
       z-index: 10;
+      background: var(--bg);
+      padding-bottom: 6px;
+    }
+
+    .header-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border);
     }
 
     .logo {
@@ -63,25 +67,19 @@
       width: 30px;
       height: 30px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #fee2e2, #6366f1);
+      background: linear-gradient(135deg, #2563eb, #22c55e);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
       font-weight: 700;
       font-size: 17px;
-      box-shadow: 0 5px 10px rgba(99, 102, 241, 0.4);
-    }
-
-    .logo-text-wrapper {
-      display: flex;
-      flex-direction: column;
+      box-shadow: 0 5px 10px rgba(37, 99, 235, 0.5);
     }
 
     .logo-text-title {
       font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.02em;
     }
 
     .logo-text-sub {
@@ -97,31 +95,27 @@
     }
 
     .chip {
-      border-radius: 999px;
-      padding: 4px 8px;
-      background: var(--primary-soft);
-      color: #4338ca;
-      font-size: 11px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      font-size: 11px;
     }
-
-    .chip span.label { font-weight: 600; }
 
     .chip button {
       border: none;
       background: transparent;
-      cursor: pointer;
       font-size: 13px;
-      padding: 0;
-      color: inherit;
+      cursor: pointer;
     }
 
     .btn {
       border-radius: 999px;
       border: none;
-      padding: 5px 10px;
+      padding: 4px 9px;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
@@ -134,23 +128,26 @@
 
     .btn-outline {
       background: transparent;
+      color: var(--text);
       border: 1px solid var(--border);
-      color: var(--text-main);
     }
 
     .btn-sm {
-      padding: 4px 9px;
+      padding: 3px 8px;
       font-size: 11px;
     }
 
     main {
-      margin-top: 10px;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .screen {
       display: none;
-      gap: 10px;
       flex-direction: column;
+      gap: 10px;
     }
 
     .screen-active {
@@ -158,17 +155,24 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.96);
+      background: var(--card);
       border-radius: var(--radius-lg);
       padding: 10px 11px 12px;
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(229, 231, 235, 0.9);
+      border: 1px solid var(--border);
+    }
+
+    .card-soft {
+      background: var(--card-soft);
+      border-radius: var(--radius-md);
+      padding: 7px 8px;
+      border: 1px solid #e4e4e7;
     }
 
     .card-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 6px;
       margin-bottom: 6px;
     }
@@ -181,34 +185,14 @@
       gap: 6px;
     }
 
-    .card-title span.emoji {
-      font-size: 16px;
-    }
+    .card-title .emoji { font-size: 16px; }
 
     .card-subtitle {
       font-size: 11px;
       color: var(--text-muted);
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .pill {
-      font-size: 10px;
-      border-radius: 999px;
-      padding: 3px 8px;
-      background: #f3f4ff;
-      color: #4f46e5;
-    }
-
-    .pill-muted {
-      background: #f3f4f6;
-      color: #6b7280;
-    }
+    /* 日选择 + 概览 */
 
     .day-selector {
       display: flex;
@@ -222,15 +206,15 @@
       padding: 3px 7px;
       border-radius: 999px;
       border: 1px solid transparent;
-      cursor: pointer;
-      background: #f3f4ff;
+      background: #e5e7eb;
       color: #4b5563;
+      cursor: pointer;
     }
 
     .day-chip.active {
-      background: #6366f1;
+      background: #2563eb;
       color: #f9fafb;
-      border-color: #4f46e5;
+      border-color: #1d4ed8;
     }
 
     .summary-row {
@@ -239,21 +223,40 @@
       gap: 6px;
       font-size: 11px;
       color: var(--text-muted);
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
-    .summary-row span strong {
-      color: var(--text-main);
+    .summary-row span strong { color: var(--text); }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .pill {
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #e0f2fe;
+      color: #1d4ed8;
+    }
+
+    .pill-muted {
+      background: #e5e7eb;
+      color: #6b7280;
     }
 
     .section-divider {
       margin: 8px 0 6px;
       height: 1px;
-      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      background: linear-gradient(to right, transparent, #e4e4e7, transparent);
     }
 
+    /* 行程列表 */
+
     .itinerary-list {
-      margin-top: 4px;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -295,8 +298,8 @@
       font-size: 10px;
       padding: 2px 7px;
       border-radius: 999px;
-      background: #eef2ff;
-      color: #4338ca;
+      background: #dbeafe;
+      color: #1e40af;
       white-space: nowrap;
     }
 
@@ -314,6 +317,14 @@
       align-items: center;
     }
 
+    .badge-distance {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
     .it-meta {
       font-size: 10px;
       color: #6b7280;
@@ -325,13 +336,7 @@
       gap: 4px;
     }
 
-    .badge-distance {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: #ecfeff;
-      color: #0369a1;
-    }
+    /* 表单 */
 
     .form-inline {
       display: flex;
@@ -346,24 +351,24 @@
       padding: 4px 7px;
       font-size: 11px;
       border-radius: 999px;
-      border: 1px solid #d1d5db;
-      background: #f9fafb;
+      border: 1px solid #d4d4d8;
+      background: #fafafa;
       min-width: 0;
     }
 
-    .form-inline input.short { width: 70px; }
+    .form-inline input.short { width: 72px; }
     .form-inline input.medium { width: 110px; }
     .form-inline input.long { flex: 1 1 150px; }
 
     .form-inline textarea {
       font-size: 11px;
       border-radius: 8px;
-      border: 1px solid #d1d5db;
+      border: 1px solid #d4d4d8;
       padding: 5px 7px;
       width: 100%;
       resize: vertical;
       min-height: 38px;
-      background: #f9fafb;
+      background: #fafafa;
     }
 
     .subtle-label {
@@ -371,16 +376,18 @@
       color: #6b7280;
     }
 
+    /* 清单 */
+
     .two-column {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 8px;
       margin-top: 4px;
     }
 
     @media (max-width: 420px) {
       .two-column {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
@@ -389,7 +396,7 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      max-height: 260px;
+      max-height: 250px;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -402,23 +409,23 @@
       padding: 5px 7px;
       border-radius: 9px;
       background: #f9fafb;
-      border: 1px solid #e5e7eb;
+      border: 1px solid #e4e4e7;
     }
-
-    .check-item input[type="checkbox"] {
-      margin-top: 1px;
-    }
-
-    .check-item span.text { flex: 1; }
 
     .check-item.done span.text {
       text-decoration: line-through;
       color: #9ca3af;
     }
 
+    .check-item input[type="checkbox"] {
+      margin-top: 1px;
+    }
+
+    /* 收藏 */
+
     .favorites-list {
       margin-top: 4px;
-      max-height: 340px;
+      max-height: 320px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -430,7 +437,7 @@
       font-size: 11px;
       padding: 6px 8px;
       border-radius: 10px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid #e4e4e7;
       background: #f9fafb;
     }
 
@@ -465,33 +472,31 @@
       flex-wrap: wrap;
     }
 
-    .muted-link {
-      font-size: 10px;
-      color: #4b5563;
-      text-decoration: none;
-      border-bottom: 1px dashed #d1d5db;
-    }
-
-    .muted-link:hover { color: #111827; }
-
-    .text-link-button {
-      border: none;
-      background: transparent;
-      padding: 0;
-      margin: 0;
-      font-size: 10px;
-      color: #4b5563;
-      cursor: pointer;
-      border-bottom: 1px dashed #d1d5db;
-    }
-
-    .text-link-button:hover { color: #111827; }
-
     .small-note {
       font-size: 10px;
       color: #9ca3af;
       margin-top: 2px;
     }
+
+    .muted-link,
+    .text-link-button {
+      font-size: 10px;
+      color: #4b5563;
+      text-decoration: none;
+      border-bottom: 1px dashed #d4d4d8;
+      background: transparent;
+      border-radius: 0;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .muted-link:hover,
+    .text-link-button:hover {
+      color: #111827;
+    }
+
+    /* 汇率 */
 
     .exchange-row {
       display: flex;
@@ -505,9 +510,10 @@
     .exchange-row input {
       padding: 4px 7px;
       border-radius: 999px;
-      border: 1px solid #d1d5db;
+      border: 1px solid #d4d4d8;
       font-size: 11px;
       width: 90px;
+      background: #fafafa;
     }
 
     .exchange-result {
@@ -515,32 +521,40 @@
       color: #4b5563;
     }
 
+    .tiny {
+      font-size: 9px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    /* 底部导航 */
+
     .bottom-nav {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 20;
       display: flex;
       justify-content: center;
       pointer-events: none;
+      z-index: 20;
     }
 
     .bottom-nav-inner {
-      pointer-events: auto;
       max-width: 480px;
       width: 100%;
       padding: 6px 10px 10px;
+      pointer-events: auto;
     }
 
     .bottom-nav-bar {
-      background: rgba(15, 23, 42, 0.95);
+      background: #111827;
       border-radius: 16px;
       padding: 6px;
       display: flex;
       justify-content: space-between;
       gap: 4px;
-      box-shadow: 0 -4px 14px rgba(15, 23, 42, 0.5);
+      box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.6);
     }
 
     .nav-btn {
@@ -565,29 +579,26 @@
       background: #f9fafb;
       color: #111827;
     }
-
-    .tiny { font-size: 9px; color: #9ca3af; }
-
   </style>
 </head>
 <body>
 <div class="app">
   <header class="app-header">
-    <div class="logo">
-      <div class="logo-badge">U</div>
-      <div class="logo-text-wrapper">
-        <div class="logo-text-title">UsTrip</div>
-        <div class="logo-text-sub" id="trip-subtitle">我们的台湾旅行</div>
+    <div class="header-card">
+      <div class="logo">
+        <div class="logo-badge">U</div>
+        <div>
+          <div class="logo-text-title" id="trip-name">UsTrip</div>
+          <div class="logo-text-sub" id="trip-subtitle">我们的台湾旅行</div>
+        </div>
       </div>
-    </div>
-    <div class="header-right">
-      <div class="chip">
-        <span class="label" id="exchange-display">1 TWD ≈ 0.15 MYR</span>
-        <button id="btn-edit-exchange" title="修改汇率">✏️</button>
+      <div class="header-right">
+        <div class="chip">
+          <span id="exchange-display">1 TWD ≈ 0.1500 MYR</span>
+          <button id="btn-edit-exchange" title="修改汇率">✏️</button>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-edit-trip">行程信息</button>
       </div>
-      <button class="btn btn-outline btn-sm" id="btn-edit-trip">
-        ✨ 行程信息
-      </button>
     </div>
   </header>
 
@@ -601,14 +612,13 @@
               <span class="emoji">🗺️</span>
               <span>行程总览</span>
             </div>
-            <div class="card-subtitle" id="trip-summary">
-              还没设置日期 · 共 0 天
-            </div>
+            <div class="card-subtitle" id="trip-summary">还没设置日期 · 共 0 天</div>
             <div class="pill-row" id="city-overview"></div>
           </div>
         </div>
 
-        <div>
+        <div class="card-soft">
+          <div class="card-subtitle" style="margin-bottom:4px;">选择要查看的日程：</div>
           <div class="day-selector" id="day-selector"></div>
           <div class="summary-row" id="day-summary"></div>
         </div>
@@ -616,26 +626,25 @@
         <div class="section-divider"></div>
 
         <div>
-          <div class="card-title" style="font-size: 13px; margin-bottom: 2px;">
+          <div class="card-title" style="font-size:13px;margin-bottom:2px;">
             <span class="emoji">📅</span>
             <span id="itinerary-title">今日行程</span>
           </div>
           <div class="card-subtitle">
-            点击「地图」跳转 Google Maps，同一天内会算“距上一地点”。
+            同一天连续地点有经纬度时，会显示「距上一点约 X km」；点击「地图」打开 Google Maps。
           </div>
           <div class="itinerary-list" id="itinerary-list"></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title" style="font-size: 13px; margin-bottom: 2px;">
+        <div class="card-title" style="font-size:13px;margin-bottom:2px;">
           <span class="emoji">➕</span>
-          <span>新增行程项目</span>
+          <span>新增行程项目（当前 Day）</span>
         </div>
-        <div class="card-subtitle">
-          时间、类型、标题必填；经纬度可选，填了才有距离。
-        </div>
-        <div class="form-inline" style="margin-top: 4px;">
+        <div class="card-subtitle">时间、类型、标题必填，经纬度可选。</div>
+
+        <div class="form-inline" style="margin-top:4px;">
           <span class="subtle-label">时间</span>
           <input id="input-time" type="time" class="short" />
           <span class="subtle-label">类型</span>
@@ -647,29 +656,35 @@
             <option value="other">其他</option>
           </select>
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">标题</span>
           <input id="input-title" type="text" class="long" placeholder="例如：西门町 / 饶河夜市" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">地址</span>
-          <input id="input-address" type="text" class="long" placeholder="可选，方便导航" />
+          <input id="input-address" type="text" class="long" placeholder="可选，方便认地点" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">地图</span>
           <input id="input-map" type="text" class="long" placeholder="粘贴 Google Maps 链接（可选）" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">经纬度</span>
           <input id="input-lat" type="number" step="0.000001" class="medium" placeholder="lat" />
           <input id="input-lng" type="number" step="0.000001" class="medium" placeholder="lng" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">备注</span>
-          <textarea id="input-notes" placeholder="排队时间、人多、必吃项目…"></textarea>
+          <textarea id="input-notes" placeholder="排队时间、人多、必点项目…"></textarea>
         </div>
-        <div class="form-inline" style="margin-top: 6px; justify-content:flex-end;">
-          <button class="btn btn-sm" id="btn-add-it">✅ 添加到当前日期</button>
+
+        <div class="form-inline" style="margin-top:6px;justify-content:flex-end;">
+          <button class="btn btn-sm" id="btn-add-it">添加到当前日期</button>
         </div>
       </div>
     </section>
@@ -677,29 +692,27 @@
     <!-- 收藏 -->
     <section class="screen" data-screen="favorites">
       <div class="card">
-        <div class="card-title" style="margin-bottom: 2px;">
+        <div class="card-title" style="margin-bottom:2px;">
           <span class="emoji">📍</span>
-          <span>收藏地点 · 一键加入行程</span>
+          <span>收藏地点 · 愿望清单</span>
         </div>
         <div class="card-subtitle">
-          提前把想去的店 / 景点存好，到时候一键塞进某一天。
-        </div>
-
-        <div class="card-subtitle" style="margin-top: 6px; font-size: 10px;">
-          下方收藏列表，点击「加入行程」即可选择 Day。
+          把 YouTube、IG 上看到想去的店先收藏，之后塞进某一天行程即可。
         </div>
         <div class="favorites-list" id="favorites-list"></div>
       </div>
 
       <div class="card">
-        <div class="card-title" style="font-size: 13px; margin-bottom: 2px;">
+        <div class="card-title" style="font-size:13px;margin-bottom:2px;">
           <span class="emoji">➕</span>
           <span>新增收藏地点</span>
         </div>
-        <div class="form-inline" style="margin-top: 4px;">
+
+        <div class="form-inline" style="margin-top:4px;">
           <span class="subtle-label">名称</span>
           <input id="fav-name" type="text" class="long" placeholder="店名 / 景点名" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">类型</span>
           <select id="fav-type">
@@ -712,25 +725,30 @@
           <span class="subtle-label">标签</span>
           <input id="fav-tags" type="text" class="medium" placeholder="例如：Mabel 想去" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">地址</span>
           <input id="fav-address" type="text" class="long" placeholder="可选" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">地图</span>
           <input id="fav-map" type="text" class="long" placeholder="Google Maps 链接（可选）" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">经纬度</span>
           <input id="fav-lat" type="number" step="0.000001" class="medium" placeholder="lat" />
           <input id="fav-lng" type="number" step="0.000001" class="medium" placeholder="lng" />
         </div>
+
         <div class="form-inline">
           <span class="subtle-label">备注</span>
-          <textarea id="fav-notes" placeholder="来自哪个 YouTuber、必点菜…"></textarea>
+          <textarea id="fav-notes" placeholder="哪位 YouTuber 推荐、必点菜…"></textarea>
         </div>
-        <div class="form-inline" style="margin-top: 6px; justify-content:flex-end;">
-          <button class="btn btn-sm btn-outline" id="btn-add-fav">⭐ 加入收藏</button>
+
+        <div class="form-inline" style="margin-top:6px;justify-content:flex-end;">
+          <button class="btn btn-sm btn-outline" id="btn-add-fav">加入收藏</button>
         </div>
       </div>
     </section>
@@ -742,34 +760,32 @@
           <div>
             <div class="card-title">
               <span class="emoji">✅</span>
-              <span>行前 To-do & 打包清单</span>
+              <span>行前待办 & 打包清单</span>
             </div>
-            <div class="card-subtitle">
-              行前准备 + 打包，都集中这里。
-            </div>
+            <div class="card-subtitle">把脑袋里的东西都倒出来写在这里，安心很多。</div>
           </div>
         </div>
 
         <div class="two-column">
           <div>
-            <div class="card-title" style="font-size: 13px; margin-bottom: 2px;">
+            <div class="card-title" style="font-size:13px;margin-bottom:2px;">
               <span class="emoji">📋</span>
               <span>行前待办</span>
             </div>
             <div class="checklist-section" id="checklist-pretrip"></div>
-            <div class="form-inline" style="margin-top: 6px;">
+            <div class="form-inline" style="margin-top:6px;">
               <input id="pretrip-new" type="text" class="long" placeholder="新增待办，例如：购买保险" />
               <button class="btn btn-sm btn-outline" id="btn-add-pretrip">➕</button>
             </div>
           </div>
 
           <div>
-            <div class="card-title" style="font-size: 13px; margin-bottom: 2px;">
+            <div class="card-title" style="font-size:13px;margin-bottom:2px;">
               <span class="emoji">🎒</span>
               <span>打包清单</span>
             </div>
             <div class="checklist-section" id="checklist-packing"></div>
-            <div class="form-inline" style="margin-top: 6px;">
+            <div class="form-inline" style="margin-top:6px;">
               <input id="packing-new" type="text" class="long" placeholder="新增物品，例如：充电器" />
               <button class="btn btn-sm btn-outline" id="btn-add-packing">➕</button>
             </div>
@@ -781,24 +797,23 @@
     <!-- 汇率 -->
     <section class="screen" data-screen="fx">
       <div class="card">
-        <div class="card-title" style="margin-bottom: 2px;">
+        <div class="card-title" style="margin-bottom:2px;">
           <span class="emoji">💱</span>
           <span>汇率 & 小换算器</span>
         </div>
         <div class="card-subtitle">
-          手动输入 1 TWD = ? MYR，在夜市快速估算花费。
+          夜市现场用：输入台币金额，大概知道花了多少马币。
         </div>
+
         <div class="exchange-row">
           <span class="subtle-label">金额</span>
           <input id="fx-amount" type="number" step="0.01" placeholder="TWD" />
           <span id="fx-result" class="exchange-result">= 0 MYR</span>
         </div>
-        <div class="small-note">
-          汇率仅供参考，以实际扣款为准。
-        </div>
+
         <div class="section-divider"></div>
         <div class="tiny">
-          小技巧：你可以在行程的备注里写「预算 TWD 800」，来这里试算成 MYR。
+          汇率为手动输入，仅做估算使用；以实际刷卡 / 扣款结果为准。
         </div>
       </div>
     </section>
@@ -830,13 +845,12 @@
 </nav>
 
 <script>
-  // ------- 数据结构 & 存储 -------
-
-  const STORAGE_KEY = "ustrip_mobile_v1";
+  // ===== 数据与工具 =====
+  const STORAGE_KEY = "ustrip_ustrip_v2";
 
   const defaultData = {
     trip: {
-      name: "UsTrip · 台湾旅行",
+      name: "UsTrip 台湾旅行",
       subtitle: "我们的台湾旅行",
       startDate: "",
       endDate: "",
@@ -855,7 +869,7 @@
     checklist: [
       { id: "pre1", category: "pretrip", text: "购买旅游保险", done: false },
       { id: "pre2", category: "pretrip", text: "兑换台币现金", done: false },
-      { id: "pre3", category: "pretrip", text: "确认机票 & 酒店预订信息", done: false },
+      { id: "pre3", category: "pretrip", text: "确认机票 & 酒店订单", done: false },
       { id: "pack1", category: "packing", text: "护照 & 证件复印件", done: false },
       { id: "pack2", category: "packing", text: "充电器 / 插头转换器", done: false },
       { id: "pack3", category: "packing", text: "日常药物", done: false }
@@ -863,23 +877,24 @@
     favorites: []
   };
 
-  let data = loadData();
-  let currentDayId = data.days[0]?.id || "day1";
+  function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
 
   function loadData() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return structuredClone(defaultData);
-      const obj = JSON.parse(raw);
+      if (!raw) return deepClone(defaultData);
+      const parsed = JSON.parse(raw);
       return {
-        trip: { ...defaultData.trip, ...(obj.trip || {}) },
-        days: obj.days && obj.days.length ? obj.days : structuredClone(defaultData.days),
-        checklist: obj.checklist || structuredClone(defaultData.checklist),
-        favorites: obj.favorites || []
+        trip: { ...defaultData.trip, ...(parsed.trip || {}) },
+        days: parsed.days && parsed.days.length ? parsed.days : deepClone(defaultData.days),
+        checklist: parsed.checklist || deepClone(defaultData.checklist),
+        favorites: parsed.favorites || []
       };
     } catch (e) {
       console.warn("load failed, use default", e);
-      return structuredClone(defaultData);
+      return deepClone(defaultData);
     }
   }
 
@@ -891,23 +906,20 @@
     }
   }
 
-  // ------- 工具函数 -------
-
   function uid(prefix) {
-    return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7);
+    return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 6);
   }
 
   function getDistanceKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
-    const toRad = deg => (deg * Math.PI) / 180;
+    const toRad = d => (d * Math.PI) / 180;
     const dLat = toRad(lat2 - lat1);
     const dLon = toRad(lon2 - lon1);
     const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLat / 2) ** 2 +
       Math.cos(toRad(lat1)) *
         Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+        Math.sin(dLon / 2) ** 2;
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -918,17 +930,12 @@
     return km.toFixed(1) + " km";
   }
 
-  function getCurrentDay() {
-    return data.days.find(d => d.id === currentDayId) || data.days[0];
-  }
-
   function typeLabel(t) {
     switch (t) {
       case "poi": return "景点";
       case "food": return "美食";
       case "hotel": return "住宿";
       case "transport": return "交通";
-      case "other":
       default: return "其他";
     }
   }
@@ -943,28 +950,28 @@
     }
   }
 
-  // ------- 渲染：头部 & 行程信息 -------
+  // 全局状态
+  let data = loadData();
+  let currentDayId = data.days[0]?.id || "day1";
+
+  // ===== 渲染头部 & 行程信息 =====
 
   function renderHeader() {
-    const trip = data.trip;
-    document.getElementById("trip-subtitle").textContent =
-      trip.subtitle || trip.name || "我们的旅行";
-
-    const exchangeDisplay = document.getElementById("exchange-display");
-    exchangeDisplay.textContent =
-      `1 ${trip.localCurrency} ≈ ${trip.exchangeRate.toFixed(4)} ${trip.baseCurrency}`;
+    const t = data.trip;
+    document.getElementById("trip-name").textContent = t.name || "UsTrip";
+    document.getElementById("trip-subtitle").textContent = t.subtitle || "我们的旅行";
+    document.getElementById("exchange-display").textContent =
+      `1 ${t.localCurrency} ≈ ${t.exchangeRate.toFixed(4)} ${t.baseCurrency}`;
   }
 
   function renderTripSummary() {
-    const trip = data.trip;
+    const t = data.trip;
     const days = data.days;
-    const summaryEl = document.getElementById("trip-summary");
     const dayCount = days.length;
-    const datePart =
-      trip.startDate && trip.endDate
-        ? `${trip.startDate} - ${trip.endDate}`
-        : "还没设置日期";
-    summaryEl.textContent = `${datePart} · 共 ${dayCount} 天`;
+    const dateText =
+      t.startDate && t.endDate ? `${t.startDate} - ${t.endDate}` : "还没设置日期";
+    document.getElementById("trip-summary").textContent =
+      `${dateText} · 共 ${dayCount} 天`;
 
     const cityOverview = document.getElementById("city-overview");
     cityOverview.innerHTML = "";
@@ -977,7 +984,7 @@
     if (!entries.length) {
       const span = document.createElement("span");
       span.className = "pill pill-muted";
-      span.textContent = "还没给每一天设置城市";
+      span.textContent = "还没为每天标记城市";
       cityOverview.appendChild(span);
     } else {
       entries.forEach(([city, count]) => {
@@ -987,6 +994,10 @@
         cityOverview.appendChild(span);
       });
     }
+  }
+
+  function getCurrentDay() {
+    return data.days.find(d => d.id === currentDayId) || data.days[0];
   }
 
   function renderDaySelector() {
@@ -999,7 +1010,8 @@
       btn.textContent = `${day.label}${dateLabel}`;
       btn.addEventListener("click", () => {
         currentDayId = day.id;
-        renderAll();
+        renderDaySummary();
+        renderItinerary();
       });
       container.appendChild(btn);
     });
@@ -1009,18 +1021,19 @@
     const summary = document.getElementById("day-summary");
     const day = getCurrentDay();
     if (!day) {
-      summary.textContent = "尚未创建任何行程日";
+      summary.innerHTML = '<span>尚未创建行程日</span>';
       return;
     }
-    const count = day.items.length;
     const dateText = day.date || "日期未设置";
     const cityText = day.city || "城市未设置";
-    summary.innerHTML = `
-      <span><strong>${day.label}</strong> · ${dateText} · ${cityText}</span>
-      <span>共 <strong>${count}</strong> 个行程点</span>
-    `;
+    const count = day.items.length;
+    summary.innerHTML =
+      `<span><strong>${day.label}</strong> · ${dateText} · ${cityText}</span>` +
+      `<span>共 <strong>${count}</strong> 个行程点</span>`;
     document.getElementById("itinerary-title").textContent = `${day.label} 行程`;
   }
+
+  // ===== 渲染行程时间轴 =====
 
   function renderItinerary() {
     const listEl = document.getElementById("itinerary-list");
@@ -1028,43 +1041,43 @@
     const day = getCurrentDay();
     if (!day) return;
 
-    const items = [...day.items].sort((a, b) => (a.time || "").localeCompare(b.time || ""));
-
-    let prevWithGeo = null;
-    items.forEach(item => {
-      item._distanceFromPrev = null;
-      if (
-        prevWithGeo &&
-        prevWithGeo.lat != null &&
-        prevWithGeo.lng != null &&
-        item.lat != null &&
-        item.lng != null
-      ) {
-        const km = getDistanceKm(
-          Number(prevWithGeo.lat),
-          Number(prevWithGeo.lng),
-          Number(item.lat),
-          Number(item.lng)
-        );
-        item._distanceFromPrev = km;
-      }
-      if (item.lat != null && item.lng != null) {
-        prevWithGeo = item;
-      }
-    });
+    const items = [...day.items].sort((a, b) =>
+      (a.time || "").localeCompare(b.time || "")
+    );
 
     if (!items.length) {
       const empty = document.createElement("div");
       empty.className = "card-subtitle";
       empty.style.marginTop = "4px";
-      empty.textContent = "今天还没有行程，下面先新增一个吧～";
+      empty.textContent = "今天还没有行程，可以从下方或「收藏地点」开始添加。";
       listEl.appendChild(empty);
       return;
     }
 
+    // 计算连续带经纬度的距离
+    let prevGeo = null;
+    items.forEach(it => {
+      it._distanceFromPrev = null;
+      if (
+        prevGeo &&
+        prevGeo.lat != null &&
+        prevGeo.lng != null &&
+        it.lat != null &&
+        it.lng != null
+      ) {
+        it._distanceFromPrev = getDistanceKm(
+          Number(prevGeo.lat),
+          Number(prevGeo.lng),
+          Number(it.lat),
+          Number(it.lng)
+        );
+      }
+      if (it.lat != null && it.lng != null) prevGeo = it;
+    });
+
     items.forEach(item => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "it-item";
+      const row = document.createElement("div");
+      row.className = "it-item";
 
       const timeEl = document.createElement("div");
       timeEl.className = "it-time";
@@ -1095,17 +1108,17 @@
       metaRow.className = "it-meta-row";
 
       if (item._distanceFromPrev != null) {
-        const distBadge = document.createElement("span");
-        distBadge.className = "badge-distance";
-        distBadge.textContent = "距上一点约 " + formatKm(item._distanceFromPrev);
-        metaRow.appendChild(distBadge);
+        const dist = document.createElement("span");
+        dist.className = "badge-distance";
+        dist.textContent = "距上一点约 " + formatKm(item._distanceFromPrev);
+        metaRow.appendChild(dist);
       }
 
       if (item.lat != null && item.lng != null) {
-        const geoMeta = document.createElement("span");
-        geoMeta.className = "it-meta";
-        geoMeta.textContent = `(${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)})`;
-        metaRow.appendChild(geoMeta);
+        const geo = document.createElement("span");
+        geo.className = "it-meta";
+        geo.textContent = `(${Number(item.lat).toFixed(4)}, ${Number(item.lng).toFixed(4)})`;
+        metaRow.appendChild(geo);
       }
 
       const actions = document.createElement("div");
@@ -1125,12 +1138,11 @@
       delBtn.className = "btn btn-sm btn-outline";
       delBtn.textContent = "删除";
       delBtn.addEventListener("click", () => {
-        if (confirm("确定删除这个行程点吗？")) {
-          day.items = day.items.filter(it => it.id !== item.id);
-          saveData();
-          renderItinerary();
-          renderDaySummary();
-        }
+        if (!confirm("确定删除这个行程点吗？")) return;
+        day.items = day.items.filter(it => it.id !== item.id);
+        saveData();
+        renderDaySummary();
+        renderItinerary();
       });
       actions.appendChild(delBtn);
 
@@ -1140,25 +1152,23 @@
       main.appendChild(sub);
       main.appendChild(metaRow);
 
-      wrapper.appendChild(timeEl);
-      wrapper.appendChild(main);
-
-      listEl.appendChild(wrapper);
+      row.appendChild(timeEl);
+      row.appendChild(main);
+      listEl.appendChild(row);
     });
   }
 
-  // ------- 渲染：清单 & 收藏 -------
+  // ===== 渲染清单 =====
 
   function renderChecklist() {
     const preEl = document.getElementById("checklist-pretrip");
     const packEl = document.getElementById("checklist-packing");
-    if (!preEl || !packEl) return;
     preEl.innerHTML = "";
     packEl.innerHTML = "";
 
     data.checklist.forEach(item => {
-      const container = document.createElement("div");
-      container.className = "check-item" + (item.done ? " done" : "");
+      const box = document.createElement("div");
+      box.className = "check-item" + (item.done ? " done" : "");
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
@@ -1169,36 +1179,37 @@
         renderChecklist();
       });
 
-      const textSpan = document.createElement("span");
-      textSpan.className = "text";
-      textSpan.textContent = item.text;
+      const text = document.createElement("span");
+      text.className = "text";
+      text.textContent = item.text;
 
-      container.appendChild(checkbox);
-      container.appendChild(textSpan);
+      box.appendChild(checkbox);
+      box.appendChild(text);
 
       if (item.category === "pretrip") {
-        preEl.appendChild(container);
+        preEl.appendChild(box);
       } else if (item.category === "packing") {
-        packEl.appendChild(container);
+        packEl.appendChild(box);
       }
     });
 
     if (!preEl.children.length) {
-      preEl.innerHTML = '<div class="small-note">还没有行前待办，下面先加几个吧～</div>';
+      preEl.innerHTML = '<div class="small-note">还没有行前待办，可以在下方新增。</div>';
     }
     if (!packEl.children.length) {
-      packEl.innerHTML = '<div class="small-note">还没有打包清单，下面先加几个吧～</div>';
+      packEl.innerHTML = '<div class="small-note">还没有打包清单，可以在下方新增。</div>';
     }
   }
 
+  // ===== 渲染收藏 =====
+
   function renderFavorites() {
     const listEl = document.getElementById("favorites-list");
-    if (!listEl) return;
     listEl.innerHTML = "";
     if (!data.favorites.length) {
       const empty = document.createElement("div");
       empty.className = "small-note";
-      empty.textContent = "还没有收藏地点，下面先新增几个喜欢的店 / 景点～";
+      empty.textContent = "还没有收藏地点，先把想去的地方存起来吧～";
       listEl.appendChild(empty);
       return;
     }
@@ -1231,7 +1242,7 @@
       const addBtn = document.createElement("button");
       addBtn.className = "btn btn-sm";
       addBtn.textContent = "加入行程";
-      addBtn.addEventListener("click", () => addFavoriteToDayDialog(f));
+      addBtn.addEventListener("click", () => addFavoriteToDay(f));
       actions.appendChild(addBtn);
 
       if (f.mapLink) {
@@ -1247,53 +1258,50 @@
       delBtn.className = "text-link-button";
       delBtn.textContent = "删除";
       delBtn.addEventListener("click", () => {
-        if (confirm("确定删除这个收藏地点吗？")) {
-          data.favorites = data.favorites.filter(x => x.id !== f.id);
-          saveData();
-          renderFavorites();
-        }
+        if (!confirm("确定删除这个收藏吗？")) return;
+        data.favorites = data.favorites.filter(x => x.id !== f.id);
+        saveData();
+        renderFavorites();
       });
       actions.appendChild(delBtn);
 
       const extra = document.createElement("div");
       extra.className = "small-note";
-      let extraText = "";
-      if (f.tags && f.tags.length) {
-        extraText += "标签：" + f.tags.join("，");
-      }
-      if (f.lat != null && f.lng != null) {
-        if (extraText) extraText += " · ";
-        extraText += `(${Number(f.lat).toFixed(4)}, ${Number(f.lng).toFixed(4)})`;
-      }
-      extra.textContent = extraText;
+      const tags = f.tags && f.tags.length ? "标签：" + f.tags.join("，") : "";
+      const geo =
+        f.lat != null && f.lng != null
+          ? `(${Number(f.lat).toFixed(4)}, ${Number(f.lng).toFixed(4)})`
+          : "";
+      extra.textContent = [tags, geo].filter(Boolean).join(" · ");
 
       card.appendChild(header);
       card.appendChild(sub);
       card.appendChild(actions);
-      if (extraText) card.appendChild(extra);
+      if (extra.textContent) card.appendChild(extra);
 
       listEl.appendChild(card);
     });
   }
 
-  // ------- 渲染总入口 -------
+  // ===== 汇率换算 =====
 
-  function renderAll() {
-    renderHeader();
-    renderTripSummary();
-    renderDaySelector();
-    renderDaySummary();
-    renderItinerary();
-    renderChecklist();
-    renderFavorites();
-    updateFxCalc();
+  function updateFxCalc() {
+    const amountEl = document.getElementById("fx-amount");
+    const resultEl = document.getElementById("fx-result");
+    const amt = Number(amountEl.value);
+    const rate = data.trip.exchangeRate;
+    if (!amountEl.value || !isFinite(amt)) {
+      resultEl.textContent = `= 0 ${data.trip.baseCurrency}`;
+      return;
+    }
+    const converted = amt * rate;
+    resultEl.textContent = `≈ ${converted.toFixed(2)} ${data.trip.baseCurrency}`;
   }
 
-  // ------- 交互：新增行程 -------
+  // ===== 交互：新增行程 =====
 
   function setupAddItinerary() {
-    const btn = document.getElementById("btn-add-it");
-    btn.addEventListener("click", () => {
+    document.getElementById("btn-add-it").addEventListener("click", () => {
       const time = document.getElementById("input-time").value.trim();
       const type = document.getElementById("input-type").value;
       const title = document.getElementById("input-title").value.trim();
@@ -1308,7 +1316,8 @@
         return;
       }
 
-      const newItem = {
+      const day = getCurrentDay();
+      day.items.push({
         id: uid("it"),
         time: time || "",
         type,
@@ -1318,13 +1327,9 @@
         lat: latStr ? Number(latStr) : null,
         lng: lngStr ? Number(lngStr) : null,
         notes
-      };
+      });
 
-      const day = getCurrentDay();
-      day.items.push(newItem);
-      saveData();
-
-      // 清空
+      // 清空输入
       document.getElementById("input-title").value = "";
       document.getElementById("input-address").value = "";
       document.getElementById("input-map").value = "";
@@ -1332,12 +1337,13 @@
       document.getElementById("input-lng").value = "";
       document.getElementById("input-notes").value = "";
 
-      renderItinerary();
+      saveData();
       renderDaySummary();
+      renderItinerary();
     });
   }
 
-  // ------- 交互：收藏地点 -------
+  // ===== 交互：收藏地点 =====
 
   function setupAddFavorite() {
     document.getElementById("btn-add-fav").addEventListener("click", () => {
@@ -1372,6 +1378,7 @@
       data.favorites.push(fav);
       saveData();
 
+      // 清空
       document.getElementById("fav-name").value = "";
       document.getElementById("fav-tags").value = "";
       document.getElementById("fav-address").value = "";
@@ -1384,26 +1391,21 @@
     });
   }
 
-  function addFavoriteToDayDialog(fav) {
-    const dayOptions = data.days
-      .map(d => `${d.label}${d.date ? " · " + d.date : ""}`)
+  function addFavoriteToDay(fav) {
+    const options = data.days
+      .map((d, idx) => `${idx + 1}. ${d.label}${d.date ? " · " + d.date : ""}`)
       .join("\n");
-
-    const dayIndexStr = prompt(
-      "要加到第几天？\n" +
-        dayOptions.split("\n").map((line, idx) => `${idx + 1}. ${line}`).join("\n")
-    );
-    if (!dayIndexStr) return;
-    const idx = Number(dayIndexStr) - 1;
+    const choice = prompt("要加入哪一天？\n" + options);
+    if (!choice) return;
+    const idx = Number(choice) - 1;
     if (Number.isNaN(idx) || idx < 0 || idx >= data.days.length) {
-      alert("没有对应的天数");
+      alert("没有这一天");
       return;
     }
-
     const time = prompt("时间（例如 09:30，留空也可以）", "18:00") || "";
-    const targetDay = data.days[idx];
+    const target = data.days[idx];
 
-    targetDay.items.push({
+    target.items.push({
       id: uid("it"),
       time,
       type: fav.type === "food" || fav.type === "cafe" ? "food" : "poi",
@@ -1416,18 +1418,16 @@
     });
 
     saveData();
-    if (targetDay.id === currentDayId) {
-      renderItinerary();
+    if (target.id === currentDayId) {
       renderDaySummary();
+      renderItinerary();
     }
   }
 
-  // ------- 交互：清单 -------
+  // ===== 交互：清单 =====
 
-  function setupChecklistAdd() {
-    const preBtn = document.getElementById("btn-add-pretrip");
-    const packBtn = document.getElementById("btn-add-packing");
-    preBtn.addEventListener("click", () => {
+  function setupChecklist() {
+    document.getElementById("btn-add-pretrip").addEventListener("click", () => {
       const input = document.getElementById("pretrip-new");
       const text = input.value.trim();
       if (!text) return;
@@ -1442,7 +1442,7 @@
       renderChecklist();
     });
 
-    packBtn.addEventListener("click", () => {
+    document.getElementById("btn-add-packing").addEventListener("click", () => {
       const input = document.getElementById("packing-new");
       const text = input.value.trim();
       if (!text) return;
@@ -1458,19 +1458,19 @@
     });
   }
 
-  // ------- 交互：汇率 -------
+  // ===== 交互：汇率 & 行程信息 =====
 
-  function setupExchangeRate() {
+  function setupExchange() {
     document.getElementById("btn-edit-exchange").addEventListener("click", () => {
-      const current = data.trip.exchangeRate;
+      const t = data.trip;
       const input = prompt(
-        `请输入 1 ${data.trip.localCurrency} 等于多少 ${data.trip.baseCurrency}`,
-        String(current)
+        `请输入 1 ${t.localCurrency} 等于多少 ${t.baseCurrency}`,
+        String(t.exchangeRate)
       );
       if (!input) return;
       const v = Number(input);
       if (!isFinite(v) || v <= 0) {
-        alert("请输入有效的数字");
+        alert("请输入有效数字");
         return;
       }
       data.trip.exchangeRate = v;
@@ -1480,37 +1480,22 @@
     });
 
     const fxAmount = document.getElementById("fx-amount");
-    if (fxAmount) fxAmount.addEventListener("input", updateFxCalc);
+    fxAmount.addEventListener("input", updateFxCalc);
   }
-
-  function updateFxCalc() {
-    const amountEl = document.getElementById("fx-amount");
-    const resultEl = document.getElementById("fx-result");
-    if (!amountEl || !resultEl) return;
-    const amt = Number(amountEl.value);
-    const rate = data.trip.exchangeRate;
-    if (!amountEl.value || !isFinite(amt)) {
-      resultEl.textContent = `= 0 ${data.trip.baseCurrency}`;
-      return;
-    }
-    const converted = amt * rate;
-    resultEl.textContent = `≈ ${converted.toFixed(2)} ${data.trip.baseCurrency}`;
-  }
-
-  // ------- 交互：行程信息编辑 -------
 
   function setupTripEdit() {
     document.getElementById("btn-edit-trip").addEventListener("click", () => {
-      const name = prompt("行程名称（例如：台湾 6 日游）", data.trip.name);
+      const t = data.trip;
+      const name = prompt("行程名称（例如：台湾 6 日游）", t.name);
       if (!name) return;
-      const subtitle = prompt("副标题（会显示在顶部）", data.trip.subtitle || "");
-      const startDate = prompt("出发日期（例如：2026-03-01）", data.trip.startDate || "");
-      const endDate = prompt("结束日期（例如：2026-03-06）", data.trip.endDate || "");
+      const subtitle = prompt("副标题（显示在顶部）", t.subtitle || "");
+      const startDate = prompt("出发日期（例如：2026-03-01）", t.startDate || "");
+      const endDate = prompt("结束日期（例如：2026-03-06）", t.endDate || "");
 
-      data.trip.name = name;
-      data.trip.subtitle = subtitle || name;
-      data.trip.startDate = startDate || "";
-      data.trip.endDate = endDate || "";
+      t.name = name;
+      t.subtitle = subtitle || name;
+      t.startDate = startDate || "";
+      t.endDate = endDate || "";
 
       saveData();
       renderHeader();
@@ -1518,12 +1503,11 @@
     });
   }
 
-  // ------- 底部导航切换 -------
+  // ===== 底部导航 =====
 
   function setupBottomNav() {
     const buttons = document.querySelectorAll(".nav-btn");
     const screens = document.querySelectorAll(".screen");
-
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         const target = btn.getAttribute("data-target");
@@ -1535,14 +1519,25 @@
     });
   }
 
-  // ------- 初始化 -------
+  // ===== 初始化 =====
+
+  function renderAll() {
+    renderHeader();
+    renderTripSummary();
+    renderDaySelector();
+    renderDaySummary();
+    renderItinerary();
+    renderChecklist();
+    renderFavorites();
+    updateFxCalc();
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     setupBottomNav();
     setupAddItinerary();
     setupAddFavorite();
-    setupChecklistAdd();
-    setupExchangeRate();
+    setupChecklist();
+    setupExchange();
     setupTripEdit();
     renderAll();
   });
