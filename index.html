@@ -6,17 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #f3f4f6;
+      --bg: #e0f2ff;
+      --bg-top: #e0f2ff;
+      --bg-bottom: #ffffff;
       --card: #ffffff;
-      --card-soft: #f9fafb;
+      --card-soft: #f9fbff;
       --primary: #2563eb;
       --primary-soft: #dbeafe;
       --text: #111827;
       --text-muted: #6b7280;
       --border: #e5e7eb;
-      --radius-lg: 14px;
-      --radius-md: 10px;
-      --shadow-soft: 0 4px 10px rgba(15, 23, 42, 0.06);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.12);
     }
 
     * { box-sizing: border-box; }
@@ -24,7 +26,7 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
-      background: var(--bg);
+      background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
       color: var(--text);
     }
 
@@ -32,20 +34,20 @@
       max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
-      padding: 8px 10px 72px;
+      padding: 10px 10px 80px;
     }
 
-    /* 顶部风格：偏 eMenu 的简洁 header */
+    /* 顶部 —— 仿 eMenu Tokyo */
 
     .app-header {
-      text-align: center;
-      margin-bottom: 8px;
+      text-align: left;
+      padding: 4px 4px 10px;
     }
 
     .title-main {
       font-size: 20px;
       font-weight: 700;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     .title-sub {
@@ -66,11 +68,12 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: var(--primary-soft);
+      background: rgba(255, 255, 255, 0.9);
       color: #1d4ed8;
       font-size: 11px;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
     }
 
     .chip button {
@@ -78,12 +81,13 @@
       background: transparent;
       font-size: 13px;
       cursor: pointer;
+      color: #6b7280;
     }
 
     .btn {
       border-radius: 999px;
       border: none;
-      padding: 4px 9px;
+      padding: 4px 10px;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
@@ -96,8 +100,8 @@
 
     .btn-outline {
       background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
+      color: #111827;
+      border: 1px solid #d4d4d8;
     }
 
     .btn-sm {
@@ -106,7 +110,6 @@
     }
 
     main {
-      margin-top: 6px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -120,11 +123,12 @@
     .screen-active { display: flex; }
 
     .card {
-      background: var(--card);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: var(--radius-lg);
       padding: 10px 11px 12px;
       box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(24px);
     }
 
     .card-soft {
@@ -158,43 +162,102 @@
     }
 
     .section-divider {
-      margin: 8px 0 6px;
+      margin: 8px 0 8px;
       height: 1px;
-      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+      background: linear-gradient(to right, transparent, #dbeafe, transparent);
     }
 
-    /* Day 按钮，参照 eMenu 的横向日程按钮条 */
+    /* 行程设定 + Day 卡片 */
+
+    .trip-settings-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .trip-settings-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 11px;
+    }
+
+    .trip-settings-row label {
+      font-size: 10px;
+      color: #6b7280;
+      min-width: 45px;
+    }
+
+    .trip-settings-row input {
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid #d4d4d8;
+      padding: 4px 8px;
+      background: #f9fafb;
+    }
+
+    .trip-settings-row input[type="date"] {
+      padding-right: 4px;
+    }
+
+    .trip-settings-row input[name="trip-name"] {
+      flex: 1 1 140px;
+    }
+
+    .trip-settings-row input[name="trip-subtitle"] {
+      flex: 1 1 140px;
+    }
+
+    .trip-settings-row input[name="trip-days"] {
+      width: 68px;
+    }
 
     .day-strip {
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .day-selector {
       display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
     }
 
-    .day-chip {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
+    .day-pill {
+      min-width: 70px;
+      padding: 6px 8px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid #d4d4d8;
-      background: #f3f4f6;
-      color: #4b5563;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
       cursor: pointer;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.09);
+      font-size: 11px;
+      color: #4b5563;
     }
 
-    .day-chip span {
+    .day-pill span.day-label {
       font-weight: 600;
-      margin-right: 2px;
     }
 
-    .day-chip.active {
-      background: var(--primary);
-      color: #f9fafb;
-      border-color: #1d4ed8;
+    .day-pill span.day-date {
+      font-size: 10px;
+      color: #9ca3af;
     }
+
+    .day-pill.active {
+      border-color: transparent;
+      color: #f9fafb;
+      background: linear-gradient(145deg, #2563eb, #1d4ed8);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .day-pill.active span.day-date { color: #dbeafe; }
 
     .summary-row {
       display: flex;
@@ -227,13 +290,159 @@
       color: #6b7280;
     }
 
-    /* 行程列表 */
+    /* 航班 / 酒店卡片 */
+
+    .flight-hotel-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .flight-card {
+      border-radius: 16px;
+      padding: 10px 10px 11px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #e5e7eb;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+    }
+
+    .flight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11px;
+      margin-bottom: 6px;
+      opacity: 0.95;
+    }
+
+    .flight-header span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+    }
+
+    .flight-header span.time {
+      font-weight: 600;
+    }
+
+    .flight-main {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .flight-main .code {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .flight-main .city {
+      font-size: 10px;
+      opacity: 0.85;
+    }
+
+    .flight-plane {
+      font-size: 20px;
+      opacity: 0.92;
+    }
+
+    .flight-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 10px;
+      opacity: 0.9;
+    }
+
+    .flight-footer .badge {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.28);
+      font-size: 9px;
+    }
+
+    .hotel-card {
+      border-radius: 16px;
+      padding: 9px 10px 9px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+      font-size: 11px;
+    }
+
+    .hotel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .hotel-name {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .hotel-tag {
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 9px;
+    }
+
+    .hotel-address {
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .hotel-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+      color: #6b7280;
+      font-size: 10px;
+    }
+
+    .hotel-meta span.badge {
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 9px;
+    }
+
+    .flight-hotel-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .link-button {
+      border: none;
+      background: transparent;
+      font-size: 10px;
+      color: #e5e7eb;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .link-button-dark {
+      color: #4b5563;
+    }
+
+    /* 行程时间轴 */
 
     .itinerary-list {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      max-height: 320px;
+      max-height: 260px;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -309,6 +518,16 @@
       gap: 4px;
     }
 
+    .small-btn {
+      border-radius: 999px;
+      border: 1px solid #d4d4d8;
+      background: transparent;
+      font-size: 10px;
+      padding: 2px 7px;
+      cursor: pointer;
+      color: #4b5563;
+    }
+
     /* 表单 */
 
     .form-inline {
@@ -335,7 +554,7 @@
 
     .form-inline textarea {
       font-size: 11px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #d4d4d8;
       padding: 5px 7px;
       width: 100%;
@@ -366,7 +585,7 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      max-height: 230px;
+      max-height: 240px;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -395,7 +614,7 @@
 
     .favorites-list {
       margin-top: 4px;
-      max-height: 310px;
+      max-height: 320px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -496,7 +715,7 @@
       margin-top: 2px;
     }
 
-    /* 底部导航 */
+    /* 底部导航 —— 仿 eMenu 的白色 pill */
 
     .bottom-nav {
       position: fixed;
@@ -517,21 +736,22 @@
     }
 
     .bottom-nav-bar {
-      background: #111827;
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 22px;
       padding: 6px;
       display: flex;
       justify-content: space-between;
       gap: 4px;
-      box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.7);
+      box-shadow: 0 -4px 18px rgba(15, 23, 42, 0.35);
+      backdrop-filter: blur(24px);
     }
 
     .nav-btn {
       flex: 1;
-      border-radius: 12px;
+      border-radius: 18px;
       border: none;
       background: transparent;
-      color: #e5e7eb;
+      color: #6b7280;
       font-size: 11px;
       padding: 6px 4px;
       display: flex;
@@ -545,14 +765,14 @@
     .nav-btn span.label { font-size: 10px; }
 
     .nav-btn.active {
-      background: #f9fafb;
-      color: #111827;
+      background: #111827;
+      color: #f9fafb;
     }
   </style>
 </head>
 <body>
 <div class="app">
-  <!-- 顶部：标题 + 汇率 + 行程信息 -->
+  <!-- 顶部 -->
   <header class="app-header">
     <div class="title-main" id="trip-name">UsTrip</div>
     <div class="title-sub" id="trip-subtitle">我们的台湾旅行</div>
@@ -561,45 +781,75 @@
         <span id="exchange-display">1 TWD ≈ 0.1500 MYR</span>
         <button id="btn-edit-exchange">✏️</button>
       </div>
-      <button class="btn btn-outline btn-sm" id="btn-edit-trip">行程信息</button>
     </div>
   </header>
 
   <main id="screen-container">
     <!-- 行程 -->
     <section class="screen screen-active" data-screen="itinerary">
+      <!-- 行程设定 + Day 总览 -->
       <div class="card">
         <div class="card-title-row">
           <div class="card-title">
-            <span class="emoji">🗺️</span>
-            <span>行程总览</span>
+            <span class="emoji">🧾</span>
+            <span>行程设定</span>
           </div>
         </div>
+        <div class="trip-settings-grid">
+          <div class="trip-settings-row">
+            <label>名称</label>
+            <input name="trip-name" id="trip-name-input" type="text" placeholder="例如：台湾 6 日游" />
+          </div>
+          <div class="trip-settings-row">
+            <label>备注</label>
+            <input name="trip-subtitle" id="trip-subtitle-input" type="text" placeholder="例如：UsTrip with Mabel" />
+          </div>
+          <div class="trip-settings-row">
+            <label>出发日期</label>
+            <input id="trip-start-date" type="date" />
+            <label>天数</label>
+            <input name="trip-days" id="trip-days-count" type="number" min="1" max="14" />
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+
         <div class="card-subtitle" id="trip-summary">还没设置日期 · 共 0 天</div>
         <div class="pill-row" id="city-overview"></div>
 
         <div class="section-divider"></div>
 
         <div class="day-strip">
-          <div class="card-subtitle" style="margin-bottom:4px;">选择要查看的日程：</div>
+          <div class="card-subtitle" style="margin-bottom:4px;">点击选择要查看的日期：</div>
           <div class="day-selector" id="day-selector"></div>
           <div class="summary-row" id="day-summary"></div>
+        </div>
+      </div>
+
+      <!-- 每日行程 + 航班 + 酒店 -->
+      <div class="card">
+        <div class="card-title-row">
+          <div class="card-title">
+            <span class="emoji">📅</span>
+            <span id="itinerary-title">今日行程</span>
+          </div>
+        </div>
+        <div class="card-subtitle">
+          若两个地点都填了经纬度，会自动显示「距上一点约 X km」。航班与酒店信息在上方展示。
         </div>
 
         <div class="section-divider"></div>
 
-        <div>
-          <div class="card-title" style="font-size:13px;margin-bottom:2px;">
-            <span class="emoji">📅</span>
-            <span id="itinerary-title">今日行程</span>
-          </div>
-          <div class="card-subtitle">
-            连续两个行程点都填了经纬度，就会显示「距上一点约 X km」。点击「地图」打开 Google Maps。
-          </div>
-          <div class="itinerary-list" id="itinerary-list"></div>
+        <div class="flight-hotel-block" id="flight-hotel-block">
+          <!-- JS 填充航班 / 酒店卡片 -->
         </div>
+
+        <div class="section-divider"></div>
+
+        <div class="itinerary-list" id="itinerary-list"></div>
       </div>
 
+      <!-- 新增行程表单 -->
       <div class="card">
         <div class="card-title" style="font-size:13px;margin-bottom:2px;">
           <span class="emoji">➕</span>
@@ -810,26 +1060,24 @@
 </nav>
 
 <script>
-  // ===== 数据与工具 =====
-  const STORAGE_KEY = "ustrip_style_v3";
+  // ===== 数据结构与工具函数 =====
+  const STORAGE_KEY = "ustrip_style_v4";
 
   const defaultData = {
     trip: {
       name: "UsTrip 台湾旅行",
       subtitle: "我们的台湾旅行",
       startDate: "",
-      endDate: "",
       baseCurrency: "MYR",
       localCurrency: "TWD",
       exchangeRate: 0.15
     },
     days: [
-      { id: "day1", label: "Day 1", date: "", city: "台北", items: [] },
-      { id: "day2", label: "Day 2", date: "", city: "台北", items: [] },
-      { id: "day3", label: "Day 3", date: "", city: "台北", items: [] },
-      { id: "day4", label: "Day 4", date: "", city: "台中", items: [] },
-      { id: "day5", label: "Day 5", date: "", city: "台南", items: [] },
-      { id: "day6", label: "Day 6", date: "", city: "高雄", items: [] }
+      { id: "day1", label: "Day 1", date: "", city: "台北", items: [], flight: null, hotel: null },
+      { id: "day2", label: "Day 2", date: "", city: "台北", items: [], flight: null, hotel: null },
+      { id: "day3", label: "Day 3", date: "", city: "台北", items: [], flight: null, hotel: null },
+      { id: "day4", label: "Day 4", date: "", city: "台中", items: [], flight: null, hotel: null },
+      { id: "day5", label: "Day 5", date: "", city: "台南", items: [], flight: null, hotel: null }
     ],
     checklist: [
       { id: "pre1", category: "pretrip", text: "购买旅游保险", done: false },
@@ -849,12 +1097,23 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return deepClone(defaultData);
       const parsed = JSON.parse(raw);
-      return {
+      const merged = {
         trip: { ...defaultData.trip, ...(parsed.trip || {}) },
-        days: parsed.days && parsed.days.length ? parsed.days : deepClone(defaultData.days),
+        days: parsed.days && parsed.days.length
+          ? parsed.days.map((d, idx) => ({
+              id: d.id || "day" + (idx + 1),
+              label: d.label || `Day ${idx + 1}`,
+              date: d.date || "",
+              city: d.city || "台北",
+              items: d.items || [],
+              flight: d.flight || null,
+              hotel: d.hotel || null
+            }))
+          : deepClone(defaultData.days),
         checklist: parsed.checklist || deepClone(defaultData.checklist),
         favorites: parsed.favorites || []
       };
+      return merged;
     } catch (e) {
       console.warn("load failed, use default", e);
       return deepClone(defaultData);
@@ -913,28 +1172,46 @@
     }
   }
 
+  function addDays(dateStr, offset) {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    if (Number.isNaN(d.getTime())) return "";
+    d.setDate(d.getDate() + offset);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+
   // 全局状态
   let data = loadData();
   let currentDayId = data.days[0]?.id || "day1";
 
-  // ===== 渲染头部 =====
+  // ===== Header & 行程总览 =====
   function renderHeader() {
     const t = data.trip;
     document.getElementById("trip-name").textContent = t.name || "UsTrip";
     document.getElementById("trip-subtitle").textContent = t.subtitle || "我们的旅行";
     document.getElementById("exchange-display").textContent =
       `1 ${t.localCurrency} ≈ ${t.exchangeRate.toFixed(4)} ${t.baseCurrency}`;
+
+    // 同步表单
+    document.getElementById("trip-name-input").value = t.name || "";
+    document.getElementById("trip-subtitle-input").value = t.subtitle || "";
+    document.getElementById("trip-start-date").value = t.startDate || "";
+    document.getElementById("trip-days-count").value = data.days.length;
   }
 
-  // ===== 渲染行程概览 =====
   function renderTripSummary() {
     const t = data.trip;
     const days = data.days;
     const dayCount = days.length;
     const dateText =
-      t.startDate && t.endDate ? `${t.startDate} - ${t.endDate}` : "还没设置日期";
-    document.getElementById("trip-summary").textContent =
-      `${dateText} · 共 ${dayCount} 天`;
+      t.startDate && dayCount
+        ? `${t.startDate} 起 · ${dayCount} 天`
+        : "还没设置日期";
+
+    document.getElementById("trip-summary").textContent = `${dateText}`;
 
     const cityOverview = document.getElementById("city-overview");
     cityOverview.innerHTML = "";
@@ -967,18 +1244,20 @@
     const container = document.getElementById("day-selector");
     container.innerHTML = "";
     data.days.forEach(day => {
-      const btn = document.createElement("button");
-      btn.className = "day-chip" + (day.id === currentDayId ? " active" : "");
-      const dateLabel = day.date ? ` · ${day.date}` : "";
-      btn.innerHTML = `<span>${day.label}</span>${dateLabel}`;
-      btn.addEventListener("click", () => {
+      const pill = document.createElement("button");
+      pill.className = "day-pill" + (day.id === currentDayId ? " active" : "");
+      const dateDisplay = day.date ? day.date.slice(5).replace("-", "/") : "--/--";
+      pill.innerHTML = `
+        <span class="day-label">${day.label}</span>
+        <span class="day-date">${dateDisplay}</span>
+      `;
+      pill.addEventListener("click", () => {
         currentDayId = day.id;
-        // ⭐ 修复：点击后重新渲染 Day 按钮，让 active 高亮更新
         renderDaySelector();
         renderDaySummary();
         renderItinerary();
       });
-      container.appendChild(btn);
+      container.appendChild(pill);
     });
   }
 
@@ -998,12 +1277,201 @@
     document.getElementById("itinerary-title").textContent = `${day.label} 行程`;
   }
 
-  // ===== 渲染行程时间轴 =====
+  // ===== 航班 / 酒店 =====
+  function renderFlightHotel(day) {
+    const block = document.getElementById("flight-hotel-block");
+    block.innerHTML = "";
+
+    // 航班
+    const f = day.flight;
+    const flightWrapper = document.createElement("div");
+    if (f) {
+      const card = document.createElement("div");
+      card.className = "flight-card";
+
+      const header = document.createElement("div");
+      header.className = "flight-header";
+      header.innerHTML = `
+        <span class="label">FLIGHT</span>
+        <span class="time">${f.time || "--:--"}</span>
+      `;
+
+      const main = document.createElement("div");
+      main.className = "flight-main";
+      main.innerHTML = `
+        <div>
+          <div class="code">${f.fromCode || "XXX"}</div>
+          <div class="city">${f.fromCity || ""}</div>
+        </div>
+        <div class="flight-plane">✈️</div>
+        <div style="text-align:right;">
+          <div class="code">${f.toCode || "YYY"}</div>
+          <div class="city">${f.toCity || ""}</div>
+        </div>
+      `;
+
+      const footer = document.createElement("div");
+      footer.className = "flight-footer";
+      footer.innerHTML = `
+        <span>${f.flightNo || ""} ${f.airline || ""}</span>
+        <span class="badge">${f.note || "航班信息"}</span>
+      `;
+
+      const actions = document.createElement("div");
+      actions.className = "flight-hotel-actions";
+      const editBtn = document.createElement("button");
+      editBtn.className = "link-button";
+      editBtn.textContent = "编辑航班";
+      editBtn.addEventListener("click", () => editFlight(day));
+      actions.appendChild(editBtn);
+
+      card.appendChild(header);
+      card.appendChild(main);
+      card.appendChild(footer);
+      card.appendChild(actions);
+      flightWrapper.appendChild(card);
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "flight-card";
+      empty.style.background = "linear-gradient(135deg, #60a5fa, #3b82f6)";
+      empty.innerHTML = `
+        <div class="flight-header">
+          <span class="label">FLIGHT</span>
+          <span class="time">未设置</span>
+        </div>
+        <div style="font-size:11px;opacity:0.92;margin-bottom:4px;">
+          还没有填写航班信息，可以点下面按钮设置。
+        </div>
+      `;
+      const actions = document.createElement("div");
+      actions.className = "flight-hotel-actions";
+      const setBtn = document.createElement("button");
+      setBtn.className = "link-button";
+      setBtn.textContent = "设置航班";
+      setBtn.addEventListener("click", () => editFlight(day));
+      actions.appendChild(setBtn);
+      empty.appendChild(actions);
+      flightWrapper.appendChild(empty);
+    }
+    block.appendChild(flightWrapper);
+
+    // 酒店
+    const h = day.hotel;
+    const hotelWrapper = document.createElement("div");
+    if (h) {
+      const card = document.createElement("div");
+      card.className = "hotel-card";
+
+      const header = document.createElement("div");
+      header.className = "hotel-header";
+      header.innerHTML = `
+        <div class="hotel-name">${h.name || "未命名酒店"}</div>
+        <div class="hotel-tag">酒店</div>
+      `;
+
+      const address = document.createElement("div");
+      address.className = "hotel-address";
+      address.textContent = h.address || "暂无地址信息";
+
+      const meta = document.createElement("div");
+      meta.className = "hotel-meta";
+      const checkIn = h.checkIn || "--:--";
+      const checkOut = h.checkOut || "--:--";
+      meta.innerHTML = `
+        <span>入住：${checkIn}</span>
+        <span>·</span>
+        <span>退房：${checkOut}</span>
+      `;
+      if (h.note) {
+        const span = document.createElement("span");
+        span.className = "badge";
+        span.textContent = h.note;
+        meta.appendChild(span);
+      }
+
+      const actions = document.createElement("div");
+      actions.className = "flight-hotel-actions";
+      if (h.mapLink) {
+        const link = document.createElement("a");
+        link.href = h.mapLink;
+        link.target = "_blank";
+        link.className = "muted-link";
+        link.textContent = "打开地图";
+        actions.appendChild(link);
+      }
+      const editBtn = document.createElement("button");
+      editBtn.className = "text-link-button";
+      editBtn.textContent = "编辑酒店";
+      editBtn.addEventListener("click", () => editHotel(day));
+      actions.appendChild(editBtn);
+
+      card.appendChild(header);
+      card.appendChild(address);
+      card.appendChild(meta);
+      card.appendChild(actions);
+      hotelWrapper.appendChild(card);
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "hotel-card";
+      empty.innerHTML = `
+        <div class="hotel-header">
+          <div class="hotel-name">未设置酒店</div>
+          <div class="hotel-tag">酒店</div>
+        </div>
+        <div class="hotel-address">可以填入住酒店名称、地址以及入住/退房时间。</div>
+      `;
+      const actions = document.createElement("div");
+      actions.className = "flight-hotel-actions";
+      const setBtn = document.createElement("button");
+      setBtn.className = "text-link-button link-button-dark";
+      setBtn.textContent = "设置酒店";
+      setBtn.addEventListener("click", () => editHotel(day));
+      actions.appendChild(setBtn);
+      empty.appendChild(actions);
+      hotelWrapper.appendChild(empty);
+    }
+
+    block.appendChild(hotelWrapper);
+  }
+
+  function editFlight(day) {
+    const f = day.flight || {};
+    const fromCode = prompt("出发机场代码（例如：TPE）", f.fromCode || "TPE") || "";
+    const fromCity = prompt("出发城市", f.fromCity || "台北") || "";
+    const toCode = prompt("到达机场代码（例如：KHH）", f.toCode || "KHH") || "";
+    const toCity = prompt("到达城市", f.toCity || "高雄") || "";
+    const time = prompt("起飞时间（例如：09:05）", f.time || "") || "";
+    const flightNo = prompt("航班号（例如：BR115）", f.flightNo || "") || "";
+    const airline = prompt("航空公司", f.airline || "") || "";
+    const note = prompt("备注（例如：提早 2 小时到机场）", f.note || "") || "";
+    day.flight = {
+      fromCode, fromCity, toCode, toCity, time, flightNo, airline, note
+    };
+    saveData();
+    renderItinerary();
+  }
+
+  function editHotel(day) {
+    const h = day.hotel || {};
+    const name = prompt("酒店名称", h.name || "") || "";
+    const address = prompt("酒店地址（可简写）", h.address || "") || "";
+    const checkIn = prompt("入住时间（例如：15:00）", h.checkIn || "") || "";
+    const checkOut = prompt("退房时间（例如：11:00）", h.checkOut || "") || "";
+    const mapLink = prompt("Google Maps 链接（可选）", h.mapLink || "") || "";
+    const note = prompt("备注（例如：含早餐 / 近捷运站）", h.note || "") || "";
+    day.hotel = { name, address, checkIn, checkOut, mapLink, note };
+    saveData();
+    renderItinerary();
+  }
+
+  // ===== 行程时间轴 =====
   function renderItinerary() {
-    const listEl = document.getElementById("itinerary-list");
-    listEl.innerHTML = "";
     const day = getCurrentDay();
     if (!day) return;
+    renderFlightHotel(day);
+
+    const listEl = document.getElementById("itinerary-list");
+    listEl.innerHTML = "";
 
     const items = [...day.items].sort((a, b) =>
       (a.time || "").localeCompare(b.time || "")
@@ -1013,7 +1481,7 @@
       const empty = document.createElement("div");
       empty.className = "card-subtitle";
       empty.style.marginTop = "4px";
-      empty.textContent = "今天还没有行程，可以从下方或「收藏地点」开始添加。";
+      empty.textContent = "今天还没有行程，可以从上面的航班/酒店或下方表单、收藏地点开始添加。";
       listEl.appendChild(empty);
       return;
     }
@@ -1089,7 +1557,7 @@
 
       if (item.mapLink) {
         const mapBtn = document.createElement("button");
-        mapBtn.className = "btn btn-sm btn-outline";
+        mapBtn.className = "small-btn";
         mapBtn.textContent = "地图";
         mapBtn.addEventListener("click", () => {
           window.open(item.mapLink, "_blank");
@@ -1098,7 +1566,7 @@
       }
 
       const delBtn = document.createElement("button");
-      delBtn.className = "btn btn-sm btn-outline";
+      delBtn.className = "small-btn";
       delBtn.textContent = "删除";
       delBtn.addEventListener("click", () => {
         if (!confirm("确定删除这个行程点吗？")) return;
@@ -1121,7 +1589,7 @@
     });
   }
 
-  // ===== 渲染清单 =====
+  // ===== 清单 =====
   function renderChecklist() {
     const preEl = document.getElementById("checklist-pretrip");
     const packEl = document.getElementById("checklist-packing");
@@ -1163,7 +1631,7 @@
     }
   }
 
-  // ===== 渲染收藏 =====
+  // ===== 收藏 =====
   function renderFavorites() {
     const listEl = document.getElementById("favorites-list");
     listEl.innerHTML = "";
@@ -1244,7 +1712,40 @@
     });
   }
 
-  // ===== 汇率换算 =====
+  function addFavoriteToDay(fav) {
+    const options = data.days
+      .map((d, idx) => `${idx + 1}. ${d.label}${d.date ? " · " + d.date : ""}`)
+      .join("\n");
+    const choice = prompt("要加入哪一天？\n" + options);
+    if (!choice) return;
+    const idx = Number(choice) - 1;
+    if (Number.isNaN(idx) || idx < 0 || idx >= data.days.length) {
+      alert("没有这一天");
+      return;
+    }
+    const time = prompt("时间（例如 18:00，留空也可以）", "18:00") || "";
+    const target = data.days[idx];
+
+    target.items.push({
+      id: uid("it"),
+      time,
+      type: fav.type === "food" || fav.type === "cafe" ? "food" : "poi",
+      title: fav.name,
+      address: fav.address,
+      mapLink: fav.mapLink,
+      lat: fav.lat,
+      lng: fav.lng,
+      notes: fav.notes || ""
+    });
+
+    saveData();
+    if (target.id === currentDayId) {
+      renderDaySummary();
+      renderItinerary();
+    }
+  }
+
+  // ===== 汇率 =====
   function updateFxCalc() {
     const amountEl = document.getElementById("fx-amount");
     const resultEl = document.getElementById("fx-result");
@@ -1288,7 +1789,6 @@
         notes
       });
 
-      // 清空输入
       document.getElementById("input-title").value = "";
       document.getElementById("input-address").value = "";
       document.getElementById("input-map").value = "";
@@ -1302,7 +1802,7 @@
     });
   }
 
-  // ===== 交互：收藏 =====
+  // ===== 交互：添加收藏 =====
   function setupAddFavorite() {
     document.getElementById("btn-add-fav").addEventListener("click", () => {
       const name = document.getElementById("fav-name").value.trim();
@@ -1348,39 +1848,6 @@
     });
   }
 
-  function addFavoriteToDay(fav) {
-    const options = data.days
-      .map((d, idx) => `${idx + 1}. ${d.label}${d.date ? " · " + d.date : ""}`)
-      .join("\n");
-    const choice = prompt("要加入哪一天？\n" + options);
-    if (!choice) return;
-    const idx = Number(choice) - 1;
-    if (Number.isNaN(idx) || idx < 0 || idx >= data.days.length) {
-      alert("没有这一天");
-      return;
-    }
-    const time = prompt("时间（例如 09:30，留空也可以）", "18:00") || "";
-    const target = data.days[idx];
-
-    target.items.push({
-      id: uid("it"),
-      time,
-      type: fav.type === "food" || fav.type === "cafe" ? "food" : "poi",
-      title: fav.name,
-      address: fav.address,
-      mapLink: fav.mapLink,
-      lat: fav.lat,
-      lng: fav.lng,
-      notes: fav.notes || ""
-    });
-
-    saveData();
-    if (target.id === currentDayId) {
-      renderDaySummary();
-      renderItinerary();
-    }
-  }
-
   // ===== 交互：清单 =====
   function setupChecklist() {
     document.getElementById("btn-add-pretrip").addEventListener("click", () => {
@@ -1414,7 +1881,7 @@
     });
   }
 
-  // ===== 交互：汇率 & 行程信息 =====
+  // ===== 交互：汇率 & Trip Form =====
   function setupExchange() {
     document.getElementById("btn-edit-exchange").addEventListener("click", () => {
       const t = data.trip;
@@ -1437,24 +1904,61 @@
     document.getElementById("fx-amount").addEventListener("input", updateFxCalc);
   }
 
-  function setupTripEdit() {
-    document.getElementById("btn-edit-trip").addEventListener("click", () => {
-      const t = data.trip;
-      const name = prompt("行程名称（例如：台湾 6 日游）", t.name);
-      if (!name) return;
-      const subtitle = prompt("副标题（显示在顶部）", t.subtitle || "");
-      const startDate = prompt("出发日期（例如：2026-03-01）", t.startDate || "");
-      const endDate = prompt("结束日期（例如：2026-03-06）", t.endDate || "");
+  function setupTripForm() {
+    const nameInput = document.getElementById("trip-name-input");
+    const subInput = document.getElementById("trip-subtitle-input");
+    const startInput = document.getElementById("trip-start-date");
+    const daysInput = document.getElementById("trip-days-count");
 
-      t.name = name;
-      t.subtitle = subtitle || name;
-      t.startDate = startDate || "";
-      t.endDate = endDate || "";
-
+    nameInput.addEventListener("input", () => {
+      data.trip.name = nameInput.value.trim() || "UsTrip 台湾旅行";
       saveData();
       renderHeader();
-      renderTripSummary();
     });
+
+    subInput.addEventListener("input", () => {
+      data.trip.subtitle = subInput.value.trim() || data.trip.name;
+      saveData();
+      renderHeader();
+    });
+
+    function rebuildDaysFromForm() {
+      const start = startInput.value;
+      let count = Number(daysInput.value);
+      if (!isFinite(count) || count <= 0) count = data.days.length || 5;
+      if (count > 14) count = 14;
+      daysInput.value = count;
+
+      const oldDays = data.days;
+      const newDays = [];
+      for (let i = 0; i < count; i++) {
+        const old = oldDays[i];
+        const date = start ? addDays(start, i) : (old ? old.date : "");
+        newDays.push({
+          id: old ? old.id : "day" + (i + 1),
+          label: "Day " + (i + 1),
+          date,
+          city: old ? old.city : (i < 2 ? "台北" : "台湾"),
+          items: old ? old.items || [] : [],
+          flight: old ? old.flight || null : null,
+          hotel: old ? old.hotel || null : null
+        });
+      }
+      data.days = newDays;
+      data.trip.startDate = start || "";
+      if (!data.days.find(d => d.id === currentDayId)) {
+        currentDayId = data.days[0].id;
+      }
+      saveData();
+      renderTripSummary();
+      renderDaySelector();
+      renderDaySummary();
+      renderItinerary();
+      renderHeader();
+    }
+
+    startInput.addEventListener("change", rebuildDaysFromForm);
+    daysInput.addEventListener("change", rebuildDaysFromForm);
   }
 
   // ===== 底部导航 =====
@@ -1472,7 +1976,7 @@
     });
   }
 
-  // ===== 渲染总入口 =====
+  // ===== 渲染入口 =====
   function renderAll() {
     renderHeader();
     renderTripSummary();
@@ -1490,7 +1994,7 @@
     setupAddFavorite();
     setupChecklist();
     setupExchange();
-    setupTripEdit();
+    setupTripForm();
     renderAll();
   });
 </script>
