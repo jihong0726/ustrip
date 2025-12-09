@@ -2,13 +2,13 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8" />
-  <title>UsTrip · 台湾行程</title>
+  <title>UsTrip · 台湾行程菜单</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #f3f4f6;
       --card: #ffffff;
-      --card-soft: #f4f4f5;
+      --card-soft: #f9fafb;
       --primary: #2563eb;
       --primary-soft: #dbeafe;
       --text: #111827;
@@ -16,14 +16,14 @@
       --border: #e5e7eb;
       --radius-lg: 14px;
       --radius-md: 10px;
-      --shadow-soft: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --shadow-soft: 0 4px 10px rgba(15, 23, 42, 0.06);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
     }
@@ -32,66 +32,34 @@
       max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
-      padding: 10px 10px 72px;
+      padding: 8px 10px 72px;
     }
 
-    /* 顶部 */
+    /* 顶部风格：偏 eMenu 的简洁 header */
 
     .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: var(--bg);
-      padding-bottom: 6px;
+      text-align: center;
+      margin-bottom: 8px;
     }
 
-    .header-card {
+    .title-main {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .title-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-row {
+      margin-top: 8px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      background: var(--card);
-      border-radius: 16px;
-      padding: 10px 12px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
       gap: 8px;
-    }
-
-    .logo-badge {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #2563eb, #22c55e);
-      display: flex;
       align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 17px;
-      box-shadow: 0 5px 10px rgba(37, 99, 235, 0.5);
-    }
-
-    .logo-text-title {
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .logo-text-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .header-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
     }
 
     .chip {
@@ -138,7 +106,7 @@
     }
 
     main {
-      margin-top: 8px;
+      margin-top: 6px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -149,10 +117,7 @@
       flex-direction: column;
       gap: 10px;
     }
-
-    .screen-active {
-      display: flex;
-    }
+    .screen-active { display: flex; }
 
     .card {
       background: var(--card);
@@ -166,15 +131,15 @@
       background: var(--card-soft);
       border-radius: var(--radius-md);
       padding: 7px 8px;
-      border: 1px solid #e4e4e7;
+      border: 1px solid #e5e7eb;
     }
 
-    .card-header {
+    .card-title-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 6px;
-      margin-bottom: 6px;
+      align-items: center;
+      margin-bottom: 4px;
     }
 
     .card-title {
@@ -192,27 +157,41 @@
       color: var(--text-muted);
     }
 
-    /* 日选择 + 概览 */
+    .section-divider {
+      margin: 8px 0 6px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+    }
+
+    /* Day 按钮，参照 eMenu 的横向日程按钮条 */
+
+    .day-strip {
+      margin-top: 4px;
+    }
 
     .day-selector {
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
-      margin: 6px 0 4px;
     }
 
     .day-chip {
-      font-size: 10px;
-      padding: 3px 7px;
+      font-size: 11px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid transparent;
-      background: #e5e7eb;
+      border: 1px solid #d4d4d8;
+      background: #f3f4f6;
       color: #4b5563;
       cursor: pointer;
     }
 
+    .day-chip span {
+      font-weight: 600;
+      margin-right: 2px;
+    }
+
     .day-chip.active {
-      background: #2563eb;
+      background: var(--primary);
       color: #f9fafb;
       border-color: #1d4ed8;
     }
@@ -223,7 +202,7 @@
       gap: 6px;
       font-size: 11px;
       color: var(--text-muted);
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
     .summary-row span strong { color: var(--text); }
@@ -248,19 +227,13 @@
       color: #6b7280;
     }
 
-    .section-divider {
-      margin: 8px 0 6px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #e4e4e7, transparent);
-    }
-
     /* 行程列表 */
 
     .itinerary-list {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      max-height: 330px;
+      max-height: 320px;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -279,7 +252,7 @@
       font-size: 11px;
       font-weight: 600;
       color: #4b5563;
-      min-width: 40px;
+      min-width: 44px;
       padding-top: 2px;
     }
 
@@ -352,11 +325,11 @@
       font-size: 11px;
       border-radius: 999px;
       border: 1px solid #d4d4d8;
-      background: #fafafa;
+      background: #f9fafb;
       min-width: 0;
     }
 
-    .form-inline input.short { width: 72px; }
+    .form-inline input.short { width: 78px; }
     .form-inline input.medium { width: 110px; }
     .form-inline input.long { flex: 1 1 150px; }
 
@@ -367,8 +340,8 @@
       padding: 5px 7px;
       width: 100%;
       resize: vertical;
-      min-height: 38px;
-      background: #fafafa;
+      min-height: 40px;
+      background: #f9fafb;
     }
 
     .subtle-label {
@@ -384,11 +357,8 @@
       gap: 8px;
       margin-top: 4px;
     }
-
     @media (max-width: 420px) {
-      .two-column {
-        grid-template-columns: 1fr;
-      }
+      .two-column { grid-template-columns: 1fr; }
     }
 
     .checklist-section {
@@ -396,7 +366,7 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      max-height: 250px;
+      max-height: 230px;
       overflow-y: auto;
       padding-right: 2px;
     }
@@ -409,7 +379,7 @@
       padding: 5px 7px;
       border-radius: 9px;
       background: #f9fafb;
-      border: 1px solid #e4e4e7;
+      border: 1px solid #e5e7eb;
     }
 
     .check-item.done span.text {
@@ -425,7 +395,7 @@
 
     .favorites-list {
       margin-top: 4px;
-      max-height: 320px;
+      max-height: 310px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -437,7 +407,7 @@
       font-size: 11px;
       padding: 6px 8px;
       border-radius: 10px;
-      border: 1px solid #e4e4e7;
+      border: 1px solid #e5e7eb;
       background: #f9fafb;
     }
 
@@ -485,7 +455,6 @@
       text-decoration: none;
       border-bottom: 1px dashed #d4d4d8;
       background: transparent;
-      border-radius: 0;
       border: none;
       padding: 0;
       cursor: pointer;
@@ -513,7 +482,7 @@
       border: 1px solid #d4d4d8;
       font-size: 11px;
       width: 90px;
-      background: #fafafa;
+      background: #f9fafb;
     }
 
     .exchange-result {
@@ -554,7 +523,7 @@
       display: flex;
       justify-content: space-between;
       gap: 4px;
-      box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.6);
+      box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.7);
     }
 
     .nav-btn {
@@ -583,22 +552,16 @@
 </head>
 <body>
 <div class="app">
+  <!-- 顶部：标题 + 汇率 + 行程信息 -->
   <header class="app-header">
-    <div class="header-card">
-      <div class="logo">
-        <div class="logo-badge">U</div>
-        <div>
-          <div class="logo-text-title" id="trip-name">UsTrip</div>
-          <div class="logo-text-sub" id="trip-subtitle">我们的台湾旅行</div>
-        </div>
+    <div class="title-main" id="trip-name">UsTrip</div>
+    <div class="title-sub" id="trip-subtitle">我们的台湾旅行</div>
+    <div class="header-row">
+      <div class="chip">
+        <span id="exchange-display">1 TWD ≈ 0.1500 MYR</span>
+        <button id="btn-edit-exchange">✏️</button>
       </div>
-      <div class="header-right">
-        <div class="chip">
-          <span id="exchange-display">1 TWD ≈ 0.1500 MYR</span>
-          <button id="btn-edit-exchange" title="修改汇率">✏️</button>
-        </div>
-        <button class="btn btn-outline btn-sm" id="btn-edit-trip">行程信息</button>
-      </div>
+      <button class="btn btn-outline btn-sm" id="btn-edit-trip">行程信息</button>
     </div>
   </header>
 
@@ -606,18 +569,18 @@
     <!-- 行程 -->
     <section class="screen screen-active" data-screen="itinerary">
       <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">
-              <span class="emoji">🗺️</span>
-              <span>行程总览</span>
-            </div>
-            <div class="card-subtitle" id="trip-summary">还没设置日期 · 共 0 天</div>
-            <div class="pill-row" id="city-overview"></div>
+        <div class="card-title-row">
+          <div class="card-title">
+            <span class="emoji">🗺️</span>
+            <span>行程总览</span>
           </div>
         </div>
+        <div class="card-subtitle" id="trip-summary">还没设置日期 · 共 0 天</div>
+        <div class="pill-row" id="city-overview"></div>
 
-        <div class="card-soft">
+        <div class="section-divider"></div>
+
+        <div class="day-strip">
           <div class="card-subtitle" style="margin-bottom:4px;">选择要查看的日程：</div>
           <div class="day-selector" id="day-selector"></div>
           <div class="summary-row" id="day-summary"></div>
@@ -631,7 +594,7 @@
             <span id="itinerary-title">今日行程</span>
           </div>
           <div class="card-subtitle">
-            同一天连续地点有经纬度时，会显示「距上一点约 X km」；点击「地图」打开 Google Maps。
+            连续两个行程点都填了经纬度，就会显示「距上一点约 X km」。点击「地图」打开 Google Maps。
           </div>
           <div class="itinerary-list" id="itinerary-list"></div>
         </div>
@@ -692,12 +655,14 @@
     <!-- 收藏 -->
     <section class="screen" data-screen="favorites">
       <div class="card">
-        <div class="card-title" style="margin-bottom:2px;">
-          <span class="emoji">📍</span>
-          <span>收藏地点 · 愿望清单</span>
+        <div class="card-title-row">
+          <div class="card-title">
+            <span class="emoji">📍</span>
+            <span>收藏地点 · 愿望清单</span>
+          </div>
         </div>
         <div class="card-subtitle">
-          把 YouTube、IG 上看到想去的店先收藏，之后塞进某一天行程即可。
+          把 YouTube、IG 上看到想去的店先收藏，之后再决定放进哪一天的行程。
         </div>
         <div class="favorites-list" id="favorites-list"></div>
       </div>
@@ -756,19 +721,17 @@
     <!-- 清单 -->
     <section class="screen" data-screen="checklist">
       <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">
-              <span class="emoji">✅</span>
-              <span>行前待办 & 打包清单</span>
-            </div>
-            <div class="card-subtitle">把脑袋里的东西都倒出来写在这里，安心很多。</div>
+        <div class="card-title-row">
+          <div class="card-title">
+            <span class="emoji">✅</span>
+            <span>行前待办 & 打包清单</span>
           </div>
         </div>
+        <div class="card-subtitle">行前做什么、行李带什么，都集中在这里。</div>
 
         <div class="two-column">
           <div>
-            <div class="card-title" style="font-size:13px;margin-bottom:2px;">
+            <div class="card-title" style="font-size:13px;margin-top:6px;margin-bottom:2px;">
               <span class="emoji">📋</span>
               <span>行前待办</span>
             </div>
@@ -780,7 +743,7 @@
           </div>
 
           <div>
-            <div class="card-title" style="font-size:13px;margin-bottom:2px;">
+            <div class="card-title" style="font-size:13px;margin-top:6px;margin-bottom:2px;">
               <span class="emoji">🎒</span>
               <span>打包清单</span>
             </div>
@@ -797,9 +760,11 @@
     <!-- 汇率 -->
     <section class="screen" data-screen="fx">
       <div class="card">
-        <div class="card-title" style="margin-bottom:2px;">
-          <span class="emoji">💱</span>
-          <span>汇率 & 小换算器</span>
+        <div class="card-title-row">
+          <div class="card-title">
+            <span class="emoji">💱</span>
+            <span>汇率 & 小换算器</span>
+          </div>
         </div>
         <div class="card-subtitle">
           夜市现场用：输入台币金额，大概知道花了多少马币。
@@ -846,7 +811,7 @@
 
 <script>
   // ===== 数据与工具 =====
-  const STORAGE_KEY = "ustrip_ustrip_v2";
+  const STORAGE_KEY = "ustrip_style_v3";
 
   const defaultData = {
     trip: {
@@ -877,9 +842,7 @@
     favorites: []
   };
 
-  function deepClone(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
+  function deepClone(obj) { return JSON.parse(JSON.stringify(obj)); }
 
   function loadData() {
     try {
@@ -954,8 +917,7 @@
   let data = loadData();
   let currentDayId = data.days[0]?.id || "day1";
 
-  // ===== 渲染头部 & 行程信息 =====
-
+  // ===== 渲染头部 =====
   function renderHeader() {
     const t = data.trip;
     document.getElementById("trip-name").textContent = t.name || "UsTrip";
@@ -964,6 +926,7 @@
       `1 ${t.localCurrency} ≈ ${t.exchangeRate.toFixed(4)} ${t.baseCurrency}`;
   }
 
+  // ===== 渲染行程概览 =====
   function renderTripSummary() {
     const t = data.trip;
     const days = data.days;
@@ -1007,9 +970,11 @@
       const btn = document.createElement("button");
       btn.className = "day-chip" + (day.id === currentDayId ? " active" : "");
       const dateLabel = day.date ? ` · ${day.date}` : "";
-      btn.textContent = `${day.label}${dateLabel}`;
+      btn.innerHTML = `<span>${day.label}</span>${dateLabel}`;
       btn.addEventListener("click", () => {
         currentDayId = day.id;
+        // ⭐ 修复：点击后重新渲染 Day 按钮，让 active 高亮更新
+        renderDaySelector();
         renderDaySummary();
         renderItinerary();
       });
@@ -1034,7 +999,6 @@
   }
 
   // ===== 渲染行程时间轴 =====
-
   function renderItinerary() {
     const listEl = document.getElementById("itinerary-list");
     listEl.innerHTML = "";
@@ -1054,7 +1018,6 @@
       return;
     }
 
-    // 计算连续带经纬度的距离
     let prevGeo = null;
     items.forEach(it => {
       it._distanceFromPrev = null;
@@ -1159,7 +1122,6 @@
   }
 
   // ===== 渲染清单 =====
-
   function renderChecklist() {
     const preEl = document.getElementById("checklist-pretrip");
     const packEl = document.getElementById("checklist-packing");
@@ -1202,7 +1164,6 @@
   }
 
   // ===== 渲染收藏 =====
-
   function renderFavorites() {
     const listEl = document.getElementById("favorites-list");
     listEl.innerHTML = "";
@@ -1284,7 +1245,6 @@
   }
 
   // ===== 汇率换算 =====
-
   function updateFxCalc() {
     const amountEl = document.getElementById("fx-amount");
     const resultEl = document.getElementById("fx-result");
@@ -1299,7 +1259,6 @@
   }
 
   // ===== 交互：新增行程 =====
-
   function setupAddItinerary() {
     document.getElementById("btn-add-it").addEventListener("click", () => {
       const time = document.getElementById("input-time").value.trim();
@@ -1343,8 +1302,7 @@
     });
   }
 
-  // ===== 交互：收藏地点 =====
-
+  // ===== 交互：收藏 =====
   function setupAddFavorite() {
     document.getElementById("btn-add-fav").addEventListener("click", () => {
       const name = document.getElementById("fav-name").value.trim();
@@ -1378,7 +1336,6 @@
       data.favorites.push(fav);
       saveData();
 
-      // 清空
       document.getElementById("fav-name").value = "";
       document.getElementById("fav-tags").value = "";
       document.getElementById("fav-address").value = "";
@@ -1425,7 +1382,6 @@
   }
 
   // ===== 交互：清单 =====
-
   function setupChecklist() {
     document.getElementById("btn-add-pretrip").addEventListener("click", () => {
       const input = document.getElementById("pretrip-new");
@@ -1459,7 +1415,6 @@
   }
 
   // ===== 交互：汇率 & 行程信息 =====
-
   function setupExchange() {
     document.getElementById("btn-edit-exchange").addEventListener("click", () => {
       const t = data.trip;
@@ -1479,8 +1434,7 @@
       updateFxCalc();
     });
 
-    const fxAmount = document.getElementById("fx-amount");
-    fxAmount.addEventListener("input", updateFxCalc);
+    document.getElementById("fx-amount").addEventListener("input", updateFxCalc);
   }
 
   function setupTripEdit() {
@@ -1504,7 +1458,6 @@
   }
 
   // ===== 底部导航 =====
-
   function setupBottomNav() {
     const buttons = document.querySelectorAll(".nav-btn");
     const screens = document.querySelectorAll(".screen");
@@ -1519,8 +1472,7 @@
     });
   }
 
-  // ===== 初始化 =====
-
+  // ===== 渲染总入口 =====
   function renderAll() {
     renderHeader();
     renderTripSummary();
