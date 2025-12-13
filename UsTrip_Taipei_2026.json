@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "settings": {
+    "baseCurrencyCode": "MYR",
+    "targetCurrencyCode": "TWD",
+    "tripStartDate": "2026-05-07",
+    "tripDays": 7,
+    "weatherCity": "台北",
+    "weatherLat": 25.0478,
+    "weatherLng": 121.5319
+  },
+  "exchangeRate": 7.0,
+  "itinerary": [
+    {
+      "id": 1001,
+      "date": "2026-05-07",
+      "time": "09:35",
+      "category": "flight",
+      "location": "AirAsia D7 378 吉隆坡 → 台北",
+      "note": "预计 14:25 抵达台北桃园机场，搭捷运前往 N Hotel 办理入住。",
+      "showOnMap": true,
+      "fromCode": "KUL",
+      "toCode": "TPE",
+      "flightNo": "D7 378",
+      "status": "已确认",
+      "lat": 25.077,
+      "lng": 121.233
+    },
+    {
+      "id": 1002,
+      "date": "2026-05-07",
+      "time": "16:30",
+      "category": "sightseeing",
+      "location": "西门町散步",
+      "note": "逛中山堂、剥皮寮老街，感受老台北氛围。",
+      "mapsUrl": "https://goo.gl/maps/xS6D9DdF7PoY7iRr6",
+      "showOnMap": true,
+      "lat": 25.0424,
+      "lng": 121.5089
+    },
+    {
+      "id": 1003,
+      "date": "2026-05-07",
+      "time": "18:30",
+      "category": "food",
+      "location": "天天利美食坊",
+      "note": "卤肉饭 + 炸鸡排，平日18点前人较少。",
+      "mapsUrl": "https://goo.gl/maps/WAc5W5a4RBb8tMMe9",
+      "showOnMap": true,
+      "lat": 25.0425,
+      "lng": 121.5079
+    },
+    {
+      "id": 1004,
+      "date": "2026-05-08",
+      "time": "08:00",
+      "category": "food",
+      "location": "丰盛号炭烤吐司",
+      "note": "中山人气早餐，推荐炭烤总汇＋红茶牛奶。",
+      "mapsUrl": "https://goo.gl/maps/yMZ5K6Npz7J2",
+      "showOnMap": true,
+      "lat": 25.0526,
+      "lng": 121.5208
+    },
+    {
+      "id": 1005,
+      "date": "2026-05-08",
+      "time": "10:00",
+      "category": "sightseeing",
+      "location": "赤峰街小店巡礼",
+      "note": "古着店、唱片、文青咖啡，避开周末。",
+      "mapsUrl": "https://goo.gl/maps/FLcVJFt9KyE2",
+      "showOnMap": true,
+      "lat": 25.0527,
+      "lng": 121.5197
+    },
+    {
+      "id": 1006,
+      "date": "2026-05-08",
+      "time": "14:30",
+      "category": "food",
+      "location": "上引水产",
+      "note": "台北人气海鲜市场，14:00 后无排队。",
+      "mapsUrl": "https://goo.gl/maps/evN7CqVnFwr",
+      "showOnMap": true,
+      "lat": 25.0598,
+      "lng": 121.5335
+    },
+    {
+      "id": 1007,
+      "date": "2026-05-08",
+      "time": "18:30",
+      "category": "food",
+      "location": "明福台菜海产",
+      "note": "在地老饕私藏，需订位。",
+      "mapsUrl": "https://goo.gl/maps/CjC1WQ7nL4n",
+      "showOnMap": true,
+      "lat": 25.052,
+      "lng": 121.5202
+    },
+    {
+      "id": 1008,
+      "date": "2026-05-09",
+      "time": "10:00",
+      "category": "sightseeing",
+      "location": "北投温泉区",
+      "note": "地热谷、北投图书馆、温泉博物馆。",
+      "mapsUrl": "https://goo.gl/maps/b2i3xgQX8Uv",
+      "showOnMap": true,
+      "lat": 25.1365,
+      "lng": 121.5026
+    },
+    {
+      "id": 1009,
+      "date": "2026-05-09",
+      "time": "12:00",
+      "category": "food",
+      "location": "满来温泉拉面",
+      "note": "建议11点半前到，汤头浓郁。",
+      "mapsUrl": "https://goo.gl/maps/bU8YoWwLPrF2",
+      "showOnMap": true,
+      "lat": 25.1367,
+      "lng": 121.5015
+    },
+    {
+      "id": 1010,
+      "date": "2026-05-09",
+      "time": "19:30",
+      "category": "food",
+      "location": "鬼金棒辛味噌拉面",
+      "note": "民权西路，深夜场地。",
+      "mapsUrl": "https://goo.gl/maps/ghwACx6Vu8bHzrLZ7",
+      "showOnMap": true,
+      "lat": 25.0621,
+      "lng": 121.519
+    },
+    {
+      "id": 1011,
+      "date": "2026-05-10",
+      "time": "10:00",
+      "category": "sightseeing",
+      "location": "阳明山竹子湖",
+      "note": "海芋季尾声，平日上午人少。",
+      "mapsUrl": "https://goo.gl/maps/L1rZxMtPkhq",
+      "showOnMap": true,
+      "lat": 25.1665,
+      "lng": 121.5452
+    },
+    {
+      "id": 1012,
+      "date": "2026-05-10",
+      "time": "13:00",
+      "category": "food",
+      "location": "CAMA Reserve 阳明山店",
+      "note": "山景咖啡、拍照好点。",
+      "mapsUrl": "https://goo.gl/maps/NBSpR2yvFzT2",
+      "showOnMap": true,
+      "lat": 25.1691,
+      "lng": 121.546
+    },
+    {
+      "id": 1013,
+      "date": "2026-05-11",
+      "time": "09:00",
+      "category": "food",
+      "location": "林合发油饭",
+      "note": "老字号早餐油饭，外带人少。",
+      "mapsUrl": "https://goo.gl/maps/MdrxD5oPjPR2",
+      "showOnMap": true,
+      "lat": 25.0559,
+      "lng": 121.5108
+    },
+    {
+      "id": 1014,
+      "date": "2026-05-11",
+      "time": "13:00",
+      "category": "food",
+      "location": "黑米 café",
+      "note": "民生社区私房创意台菜。",
+      "mapsUrl": "https://goo.gl/maps/D2QYk4jZ1hS2",
+      "showOnMap": true,
+      "lat": 25.0608,
+      "lng": 121.5521
+    },
+    {
+      "id": 1015,
+      "date": "2026-05-11",
+      "time": "19:00",
+      "category": "food",
+      "location": "A Train by Billy Kwong",
+      "note": "私厨式料理，建议提早订位。",
+      "mapsUrl": "https://goo.gl/maps/jXY7xV46ffrRk2dG6",
+      "showOnMap": true,
+      "lat": 25.042,
+      "lng": 121.5503
+    },
+    {
+      "id": 1016,
+      "date": "2026-05-12",
+      "time": "09:30",
+      "category": "food",
+      "location": "思慕昔冰品 永康街",
+      "note": "芒果冰老字号，平日早上人少。",
+      "mapsUrl": "https://goo.gl/maps/sxYYZQmCVyA2",
+      "showOnMap": true,
+      "lat": 25.0323,
+      "lng": 121.5299
+    },
+    {
+      "id": 1017,
+      "date": "2026-05-12",
+      "time": "11:00",
+      "category": "food",
+      "location": "鼎泰丰 信义店",
+      "note": "小笼包午前免排。",
+      "mapsUrl": "https://goo.gl/maps/6YXnRy3JGeA2",
+      "showOnMap": true,
+      "lat": 25.033,
+      "lng": 121.529
+    },
+    {
+      "id": 1018,
+      "date": "2026-05-12",
+      "time": "14:00",
+      "category": "sightseeing",
+      "location": "松山文创园区 + 来好",
+      "note": "文创市集、诚品松烟书店。",
+      "mapsUrl": "https://goo.gl/maps/qb6SRM5CQgu",
+      "showOnMap": true,
+      "lat": 25.0442,
+      "lng": 121.5637
+    },
+    {
+      "id": 1019,
+      "date": "2026-05-12",
+      "time": "18:00",
+      "category": "food",
+      "location": "Hidden by DN",
+      "note": "在地厨师私房菜。",
+      "mapsUrl": "https://goo.gl/maps/dJZL9AHbSdG2",
+      "showOnMap": true,
+      "lat": 25.048,
+      "lng": 121.555
+    },
+    {
+      "id": 1020,
+      "date": "2026-05-13",
+      "time": "00:10",
+      "category": "flight",
+      "location": "AirAsia D7 379 台北 → 吉隆坡",
+      "note": "前一晚21:00 出发前往机场。",
+      "showOnMap": true,
+      "fromCode": "TPE",
+      "toCode": "KUL",
+      "flightNo": "D7 379",
+      "status": "已确认",
+      "lat": 25.077,
+      "lng": 121.233
+    }
+  ],
+  "todo": [
+    { "id": 2001, "text": "兑换台币现金（建议 1,000 MYR 起）", "done": false },
+    { "id": 2002, "text": "购买台湾 eSIM 或上网卡", "done": false },
+    { "id": 2003, "text": "准备悠游卡，可在7-11购买", "done": false },
+    { "id": 2004, "text": "确认 AirAsia 线上值机", "done": false },
+    { "id": 2005, "text": "检查护照有效期（至少6个月）", "done": false }
+  ],
+  "info": [
+    {
+      "id": 3001,
+      "title": "台北口袋美食清单",
+      "content": "天天利卤肉饭（NTD 100–180）\n丰盛号炭烤吐司（NTD 150–250）\n上引水产（NTD 400–800）\n明福台菜（NTD 800–1500）\n黑米 café（NTD 300–500）\n满来温泉拉面（NTD 250–350）\n鼎泰丰（NTD 400–700）\nA Train 私厨（NTD 800–1200）\nHidden by DN（NTD 800–1200）\n榕堤水湾餐厅（NTD 600–1000）",
+      "mapsUrl": "https://goo.gl/maps/xS6D9DdF7PoY7iRr6"
+    },
+    {
+      "id": 3002,
+      "title": "交通与避人潮技巧",
+      "content": "早餐 08:00 前或 10:30 后\n午餐 11:00–11:30 或 14:00 后\n夜市 平日 20:30 后\n文创园区 平日下午去\n建议散步区域：民生社区、青田街、剥皮寮老街。"
+    }
+  ],
+  "shop": []
+}
